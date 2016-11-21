@@ -7,19 +7,39 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.adapter.HomeAdapter;
-import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
 import com.guoxiaoixng.gxadapter.FCAdapter;
 import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.demo.adapter.HomeAdapter;
+import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final Class<?>[] ACTIVITY = {AnimationActivity.class, MultipleItemActivity.class, HeaderAndFooterActivity.class, PullToRefreshActivity.class, SectionActivity.class, EmptyViewActivity.class, DragAndSwipeActivity.class, RecyclerClickItemActivity.class, ExpandableActivity.class, StickyHeaderActivity.class};
-    private static final String[] TITLE = {"Animation Use", "MultipleItem Use", "HeaderAndFooter Use", "PullToRefresh Use", "Section Use", "EmptyView Use", "ItemDragAndSwipe Use", "RecyclerClickItemActivity", "ExpandableItem Activity", "StickyHeaderActivity"};
-    private static final String[] COLOR_STR = {"#0dddb8", "#0bd4c3", "#03cdcd", "#00b1c5", "#04b2d1", "#04b2d1", "#04b2d1", "#04b2d1", "#04b2d1", "#04b2d1"};
+    private static final Class<?>[] ACTIVITY = {
+            AnimationActivity.class,
+            MultipleItemActivity.class,
+            HeaderAndFooterActivity.class,
+            PullToRefreshActivity.class,
+            SectionActivity.class,
+            EmptyViewActivity.class,
+            DragAndSwipeActivity.class,
+            RecyclerClickItemActivity.class,
+            ExpandableActivity.class,
+            StickyHeaderActivity.class};
+
+    private static final String[] TITLE = {
+            "loading animation",
+            "multiple item",
+            "add header and footer",
+            "pull to refresh, push up to loading",
+            "expand and collpase",
+            "empty view",
+            "drag, swipe dismiss, swipe menu",
+            "item click event",
+            "expandable item",
+            "sticky header"};
+
     private ArrayList<HomeItem> mDataList;
     private RecyclerView mRecyclerView;
 
@@ -48,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             HomeItem item = new HomeItem();
             item.setTitle(TITLE[i]);
             item.setActivity(ACTIVITY[i]);
-            item.setColorStr(COLOR_STR[i]);
             mDataList.add(item);
         }
     }

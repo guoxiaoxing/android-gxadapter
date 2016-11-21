@@ -6,7 +6,7 @@
     android:id="@+id/text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@color/primary"
     android:gravity="start"
     android:layoutDirection="locale"
     android:padding="16dip"
