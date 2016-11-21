@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--如果开启侧滑菜单，则用FCSwipeLayout将顶部内容View和底部菜单View层叠起来-->
+
+<com.souche.android.sdk.fcadapter.swipe.FCSwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    app:fcadapter_show_mode="pull_out"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="4dp">
+
+    <!--底部菜单View-->
+
+    <LinearLayout
+        android:id="@+id/item_action_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/view_list_repo_action_delete"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:padding="13dp"
+            android:text="Delete"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/view_list_repo_action_update"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_light"
+            android:gravity="center"
+            android:padding="13dp"
+            android:text="Update"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <!--顶部内容View-->
+
+    <RelativeLayout
+        android:id="@+id/item_front_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/item_bg"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="item 1"
+            android:textColor="@android:color/black"
+            />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_drag_handle"/>
+    </RelativeLayout>
+
+</com.souche.android.sdk.fcadapter.swipe.FCSwipeLayout>

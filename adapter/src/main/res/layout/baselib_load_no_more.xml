@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/loading_view"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/dp_36"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:drawableLeft="@drawable/baselib_gray_feng_che"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:text="@string/loading_end"
+        android:textColor="@android:color/darker_gray"/>
+</LinearLayout>
