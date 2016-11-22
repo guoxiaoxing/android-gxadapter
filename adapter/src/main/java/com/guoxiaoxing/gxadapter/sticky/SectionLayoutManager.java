@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.sticky;
+package com.guoxiaoxing.gxadapter.sticky;
 
 import android.content.Context;
 import android.util.AttributeSet;

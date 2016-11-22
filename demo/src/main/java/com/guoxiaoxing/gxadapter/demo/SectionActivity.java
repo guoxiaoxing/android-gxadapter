@@ -7,8 +7,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.SectionAdapter;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.MySection;
@@ -27,7 +27,7 @@ public class SectionActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mData = DataServer.getSampleData();
         SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData);
-        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemClickListener() {
 
             @Override
             public void onItemChildClick(GXAdapter adapter, View view, int position) {

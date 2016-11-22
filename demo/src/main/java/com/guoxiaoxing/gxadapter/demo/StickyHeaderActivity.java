@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
-import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.LineItem;
 import com.guoxiaoxing.gxadapter.demo.sticky.StickyHeaderAdapter;
-import com.guoxiaoixng.gxadapter.sticky.StickyLayoutManager;
+import com.guoxiaoxing.gxadapter.sticky.StickyLayoutManager;
 
 import java.util.ArrayList;
 

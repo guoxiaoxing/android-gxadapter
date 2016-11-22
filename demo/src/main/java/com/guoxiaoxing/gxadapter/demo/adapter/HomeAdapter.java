@@ -2,8 +2,8 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 
 import android.animation.Animator;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
 

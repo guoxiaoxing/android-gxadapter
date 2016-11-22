@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.adapter.ItemDragAndSwipeAdapter;
-import com.guoxiaoixng.gxadapter.listener.FCItemDragListener;
-import com.guoxiaoixng.gxadapter.listener.FCItemSwipeListener;
-import com.guoxiaoixng.gxadapter.swipe.adapter.RecyclerSwipeAdapter;
+import com.guoxiaoxing.gxadapter.listener.GXItemDragListener;
+import com.guoxiaoxing.gxadapter.listener.GXItemSwipeListener;
+import com.guoxiaoxing.gxadapter.swipe.adapter.RecyclerSwipeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +32,14 @@ public class DragAndSwipeActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mData = generateData(50);
 
-        FCItemDragListener fcItemDragListener = new FCItemDragListener() {
+        GXItemDragListener GXItemDragListener = new GXItemDragListener() {
 
             @Override
             public void onItemMove(int fromPosition, int toPosition) {
             }
         };
 
-        FCItemSwipeListener fcItemSwipeListener = new FCItemSwipeListener() {
+        GXItemSwipeListener GXItemSwipeListener = new GXItemSwipeListener() {
 
             @Override
             public void onItemDismiss(int position) {
@@ -55,11 +54,11 @@ public class DragAndSwipeActivity extends AppCompatActivity {
 
         //开启拖拽排序, fcItemDragListener如果不用可不写
         mAdapter.setLongPressDragEnabled(true);
-        //mAdapter.setFCItemDragListener(fcItemDragListener);
+        //mAdapter.setGXItemDragListener(GXItemDragListener);
         //开启侧滑删除, fcItemSwipeListener如果不用可不写， 侧滑删除和侧滑菜单是互斥的，
         //开启侧滑删除后会直接删除整个ItemView，不再显示侧滑菜单。
         //mAdapter.setItemViewSwipeEnabled(true);
-        //mAdapter.setFCItemSwipeListener(fcItemSwipeListener);
+        //mAdapter.setGXItemSwipeListener(GXItemSwipeListener);
     }
 
     private List<String> generateData(int size) {

@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.adapter.ExpandableItemAdapter;
 import com.guoxiaoxing.gxadapter.demo.entity.Level0Item;
 import com.guoxiaoxing.gxadapter.demo.entity.Level1Item;
 import com.guoxiaoxing.gxadapter.demo.entity.Person;
-import com.guoxiaoixng.gxadapter.item.MultiItem;
+import com.guoxiaoxing.gxadapter.item.MultiItem;
 
 import java.util.ArrayList;
 import java.util.Random;

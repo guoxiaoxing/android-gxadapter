@@ -2,8 +2,8 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 
 import android.content.Context;
 
-import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MultipleItem;
 

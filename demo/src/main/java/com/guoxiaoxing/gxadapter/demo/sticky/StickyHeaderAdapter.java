@@ -1,8 +1,8 @@
 package com.guoxiaoxing.gxadapter.demo.sticky;
 
-import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
-import com.guoxiaoixng.gxadapter.sticky.StickyLayoutManager;
+import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.sticky.StickyLayoutManager;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.LineItem;
 

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.ClickAdapter;
 
 public class RecyclerClickItemActivity extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
 //         * Item  clcik
 //         */
 //
-        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemClickListener() {
 
             @Override
             public void onItemLongClick(GXAdapter adapter, View view, int position) {
@@ -74,7 +74,7 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
         /**
          * this is sample code
          */
-   /*     mRecyclerView.addOnItemTouchListener(new FCItemChildClickListener() {
+   /*     mRecyclerView.addOnItemTouchListener(new GXItemChildClickListener() {
             @Override
             public void SimpleOnItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
@@ -82,20 +82,20 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView.addOnItemTouchListener(new FCItemLongClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemLongClickListener() {
             @Override
             public void SimpleOnItemLongClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
         });
-        mRecyclerView.addOnItemTouchListener(new FCItemChildLongClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemChildLongClickListener() {
             @Override
             public void SimpleOnItemChildLongClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
-        mRecyclerView.addOnItemTouchListener(new FCClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();

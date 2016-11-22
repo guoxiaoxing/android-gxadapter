@@ -1,7 +1,7 @@
 package com.guoxiaoxing.gxadapter.demo.adapter;
 
-import com.guoxiaoixng.gxadapter.GXSectionAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.GXSectionAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MySection;
 import com.guoxiaoxing.gxadapter.demo.entity.Video;

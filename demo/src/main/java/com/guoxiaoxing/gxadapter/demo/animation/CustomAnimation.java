@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.view.View;
 
-import com.guoxiaoixng.gxadapter.animation.BaseAnimation;
+import com.guoxiaoxing.gxadapter.animation.BaseAnimation;
 
 public class CustomAnimation implements BaseAnimation {
 

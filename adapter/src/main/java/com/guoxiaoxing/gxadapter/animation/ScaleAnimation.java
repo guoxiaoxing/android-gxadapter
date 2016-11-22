@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.animation;
+package com.guoxiaoxing.gxadapter.animation;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

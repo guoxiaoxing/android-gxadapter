@@ -1,6 +1,6 @@
 package com.guoxiaoxing.gxadapter.demo.entity;
 
-import com.guoxiaoixng.gxadapter.item.SectionItem;
+import com.guoxiaoxing.gxadapter.item.SectionItem;
 
 public class MySection extends SectionItem<Video> {
     private boolean isMore;

@@ -1,7 +1,7 @@
 package com.guoxiaoxing.gxadapter.demo.entity;
 
 
-import com.guoxiaoixng.gxadapter.item.MultiItem;
+import com.guoxiaoxing.gxadapter.item.MultiItem;
 
 public class MultipleItem implements MultiItem {
     public static final int TEXT = 1;

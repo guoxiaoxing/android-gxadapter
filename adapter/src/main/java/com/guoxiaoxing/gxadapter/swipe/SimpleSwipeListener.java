@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.swipe;
+package com.guoxiaoxing.gxadapter.swipe;
 
 public class SimpleSwipeListener implements FCSwipeLayout.SwipeListener {
 

@@ -1,12 +1,12 @@
-package com.guoxiaoixng.gxadapter.swipe.impl;
+package com.guoxiaoxing.gxadapter.swipe.impl;
 
 import android.view.View;
 
-import com.guoxiaoixng.gxadapter.swipe.SimpleSwipeListener;
-import com.guoxiaoixng.gxadapter.swipe.FCSwipeLayout;
-import com.guoxiaoixng.gxadapter.swipe.interfaces.SwipeAdapterInterface;
-import com.guoxiaoixng.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
-import com.guoxiaoixng.gxadapter.swipe.util.Attributes;
+import com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout;
+import com.guoxiaoxing.gxadapter.swipe.SimpleSwipeListener;
+import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeAdapterInterface;
+import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
+import com.guoxiaoxing.gxadapter.swipe.util.Attributes;
 
 import java.util.ArrayList;
 import java.util.Collections;

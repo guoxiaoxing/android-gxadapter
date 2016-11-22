@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.swipe.util;
+package com.guoxiaoxing.gxadapter.swipe.util;
 
 
 public class Attributes {

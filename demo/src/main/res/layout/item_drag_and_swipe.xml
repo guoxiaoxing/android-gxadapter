@@ -2,7 +2,7 @@
 
 <!--如果开启侧滑菜单，则用FCSwipeLayout将顶部内容View和底部菜单View层叠起来-->
 
-<com.guoxiaoixng.gxadapter.swipe.FCSwipeLayout
+<com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
@@ -72,4 +72,4 @@
             android:src="@drawable/ic_drag_handle"/>
     </RelativeLayout>
 
-</com.guoxiaoixng.gxadapter.swipe.FCSwipeLayout>
+</com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout>

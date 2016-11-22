@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.GXAdapter;
 import com.guoxiaoxing.gxadapter.demo.adapter.MultipleItemQuickAdapter;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.MultipleItem;

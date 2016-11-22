@@ -3,9 +3,9 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 import android.util.Log;
 import android.view.View;
 
-import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
-import com.guoxiaoixng.gxadapter.item.MultiItem;
+import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.item.MultiItem;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.Level0Item;
 import com.guoxiaoxing.gxadapter.demo.entity.Level1Item;

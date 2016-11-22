@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.sticky;
+package com.guoxiaoxing.gxadapter.sticky;
 
 import android.text.TextUtils;
 import android.view.View;

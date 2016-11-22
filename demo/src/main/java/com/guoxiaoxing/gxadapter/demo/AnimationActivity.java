@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.listener.FCItemChildClickListener;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.listener.GXItemChildClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 import com.guoxiaoxing.gxadapter.demo.animation.CustomAnimation;
 import com.guoxiaoxing.gxadapter.demo.entity.Status;
@@ -32,7 +32,7 @@ public class AnimationActivity extends AppCompatActivity {
     private void initAdapter() {
         mQuickDemoFCAdapter = new DemoGXAdapter();
         mQuickDemoFCAdapter.openLoadAnimation();
-        mRecyclerView.addOnItemTouchListener(new FCItemChildClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemChildClickListener() {
             @Override
             public void SimpleOnItemChildClick(GXAdapter adapter, View view, int position) {
                 String content = null;

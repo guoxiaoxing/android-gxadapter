@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.fastscroller.FastScroller;
-import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.fastscroller.FastScroller;
+import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 
@@ -90,7 +90,7 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
         });
 
 
-        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemClickListener() {
             @Override
             public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(PullToRefreshActivity.this, Integer.toString(position), Toast.LENGTH_LONG).show();

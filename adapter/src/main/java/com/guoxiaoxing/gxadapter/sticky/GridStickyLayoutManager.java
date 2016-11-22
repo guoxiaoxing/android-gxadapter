@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.sticky;
+package com.guoxiaoxing.gxadapter.sticky;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +8,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.souche.android.sdk.fcadapter.R;
+import com.guoxiaoxing.gxadapter.R;
 
 /**
  * Lays out views in a grid. The number of columns can be set directly, or a minimum size can be

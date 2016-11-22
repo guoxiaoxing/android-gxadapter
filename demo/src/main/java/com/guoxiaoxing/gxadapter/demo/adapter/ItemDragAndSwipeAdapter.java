@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXItemDraggableAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.GXItemDraggableAdapter;
+import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 
 import java.util.List;

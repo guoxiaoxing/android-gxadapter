@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.GXAdapter;
-import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.GXAdapter;
+import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 
 public class HeaderAndFooterActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class HeaderAndFooterActivity extends AppCompatActivity {
         mQuickDemoFCAdapter = new DemoGXAdapter(PAGE_SIZE);
         mQuickDemoFCAdapter.openLoadAnimation();
         mRecyclerView.setAdapter(mQuickDemoFCAdapter);
-        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new GXItemClickListener() {
             @Override
             public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(HeaderAndFooterActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();

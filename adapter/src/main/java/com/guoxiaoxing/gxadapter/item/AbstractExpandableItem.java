@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.item;
+package com.guoxiaoxing.gxadapter.item;
 
 import java.util.ArrayList;
 import java.util.List;

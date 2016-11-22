@@ -1,4 +1,4 @@
-package com.guoxiaoixng.gxadapter.swipe.interfaces;
+package com.guoxiaoxing.gxadapter.swipe.interfaces;
 
 public interface SwipeAdapterInterface {
 

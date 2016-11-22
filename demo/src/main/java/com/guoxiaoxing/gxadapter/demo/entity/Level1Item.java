@@ -2,8 +2,8 @@ package com.guoxiaoxing.gxadapter.demo.entity;
 
 
 import com.guoxiaoxing.gxadapter.demo.adapter.ExpandableItemAdapter;
-import com.guoxiaoixng.gxadapter.item.AbstractExpandableItem;
-import com.guoxiaoixng.gxadapter.item.MultiItem;
+import com.guoxiaoxing.gxadapter.item.AbstractExpandableItem;
+import com.guoxiaoxing.gxadapter.item.MultiItem;
 
 public class Level1Item extends AbstractExpandableItem<Person> implements MultiItem {
     public String title;

@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -16,16 +16,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.PullToRefreshActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.AnimationActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.HeaderAndFooterActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.SectionActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.MultipleItemActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.EmptyViewActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.DragAndSwipeActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.RecyclerClickItemActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.ExpandableActivity"/>
-        <activity android:name="com.guoxiaoxing.gxadapter.demo.StickyHeaderActivity"/>
+        <activity android:name=".PullToRefreshActivity"/>
+        <activity android:name=".AnimationActivity"/>
+        <activity android:name=".HeaderAndFooterActivity"/>
+        <activity android:name=".SectionActivity"/>
+        <activity android:name=".MultipleItemActivity"/>
+        <activity android:name=".EmptyViewActivity"/>
+        <activity android:name=".DragAndSwipeActivity"/>
+        <activity android:name=".RecyclerClickItemActivity"/>
+        <activity android:name=".ExpandableActivity"/>
+        <activity android:name=".StickyHeaderActivity"/>
     </application>
 
 
