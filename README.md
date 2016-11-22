@@ -1,6 +1,6 @@
-# FCAdapter User Guide
+# GXAdapter User Guide
 
-FCAdapter是一个轻巧的RecyclerView.Adapter封装库, 提供如下功能:
+GXAdapter是一个轻巧的RecyclerView.Adapter封装库, 提供如下功能:
 
 1. 下拉刷新、上拉加载
 2. 头布局、尾布局与空布局
@@ -43,22 +43,22 @@ dependencies {
 
 # 一 基本用法
 
-FCAdapter设计的用处之一就是最大限度的减少重复的代码, 使用步骤如下: 
+GXAdapter设计的用处之一就是最大限度的减少重复的代码, 使用步骤如下: 
 
-1. 继承FCAdapter基类, 泛型为List的数据类型。
+1. 继承GXAdapter基类, 泛型为List的数据类型。
 
-2. 重写bindData()方法, 完成数据的绑定即可。FCViewHolder提供常用操作View的方法。
+2. 重写bindData()方法, 完成数据的绑定即可。GXViewHolder提供常用操作View的方法。
 
 注: position通过viewHolder.getAdapterPosition()获得
 
 ```java
-public class Adapter extends FCAdapter<Status> {
-    public FCAdapter() {
+public class Adapter extends GXAdapter<Status> {
+    public GXAdapter() {
         super(R.layout.tweet, DataServer.getSampleData());
     }
 
     @Override
-    protected void bindData(FCViewHolder viewHolder, Status item) {
+    protected void bindData(GXViewHolder viewHolder, Status item) {
         viewHolder.setText(R.id.tweetName, item.getUserName())
                 .setText(R.id.tweetText, item.getText())
                 .setText(R.id.tweetDate, item.getCreatedAt())
@@ -72,7 +72,7 @@ public class Adapter extends FCAdapter<Status> {
 如果有自定义控件或者viewHolder没有提供的方法(如: SimpleDraweeView)，就可以通过getView方法来实现获取控件，然后进行的操作。可以用以下方式:
 
 ```java
-SimpleDraweeView carPicture = fcViewHolder.getView(R.id.stock_detail_car_picture);
+SimpleDraweeView carPicture = gxViewHolder.getView(R.id.stock_detail_car_picture);
 String uri = itemsBean.getPicUrl();
   if (TextUtils.isEmpty(uri)) {
       carPicture.setImageURI(String.valueOf(uri));
@@ -84,12 +84,12 @@ String uri = itemsBean.getPicUrl();
 
 Item的点击事件
 
-通过mRecyclerView.addOnItemTouchListener,传入FCItemClickListener。
+通过mRecyclerView.addOnItemTouchListener,传入GXItemClickListener。
 
 ```java
-mRecyclerView.addOnItemTouchListener(new FCItemClickListener( ){
+mRecyclerView.addOnItemTouchListener(new GXItemClickListener( ){
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
@@ -98,12 +98,12 @@ mRecyclerView.addOnItemTouchListener(new FCItemClickListener( ){
 
 Item的长按事件
 
-通过mRecyclerView.addOnItemTouchListener,传入FCItemLongClickListener。
+通过mRecyclerView.addOnItemTouchListener,传入GXItemLongClickListener。
 
 ```java
-mRecyclerView.addOnItemTouchListener(new FCItemLongClickListener( ) {
+mRecyclerView.addOnItemTouchListener(new GXItemLongClickListener( ) {
             @Override
-            public void SimpleOnItemLongClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemLongClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
@@ -129,12 +129,12 @@ Item子控件的点击事件
     
 ```
 
-在Activity的mRecyclerView.addOnItemTouchListener,传入FCItemChildClickListener。
+在Activity的mRecyclerView.addOnItemTouchListener,传入GXItemChildClickListener。
 
 ```java
-   mRecyclerView.addOnItemTouchListener(new FCItemChildClickListener( ) {
+   mRecyclerView.addOnItemTouchListener(new GXItemChildClickListener( ) {
             @Override
-            public void SimpleOnItemChildClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemChildClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
@@ -159,12 +159,12 @@ Item子控件的长按事件
     }
 ```
 
-在Activity的mRecyclerView.addOnItemTouchListener,传入FCItemChildLongClickListener。
+在Activity的mRecyclerView.addOnItemTouchListener,传入GXItemChildLongClickListener。
 
 ```java
- mRecyclerView.addOnItemTouchListener(new FCItemChildLongClickListener( ) {
+ mRecyclerView.addOnItemTouchListener(new GXItemChildLongClickListener( ) {
             @Override
-            public void SimpleOnItemChildLongClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemChildLongClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
@@ -175,24 +175,24 @@ Item子控件的长按事件
 重写以下任意方法
 
 ```java
-mRecyclerView.addOnItemTouchListener(new FCClickListener() {
+mRecyclerView.addOnItemTouchListener(new GXClickListener() {
             @Override
-            public void onItemClick(FCAdapter adapter, View view, int position) {
+            public void onItemClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onItemLongClick(FCAdapter adapter, View view, int position) {
+            public void onItemLongClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onItemChildClick(FCAdapter adapter, View view, int position) {
+            public void onItemChildClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onItemChildLongClick(FCAdapter adapter, View view, int position) {
+            public void onItemChildLongClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });     
@@ -202,7 +202,7 @@ mRecyclerView.addOnItemTouchListener(new FCClickListener() {
 
 # 三 下拉刷新、上拉加载
 
-FCAdapter提供了下拉刷新成功后的刷新功能, 如下所示:
+GXAdapter提供了下拉刷新成功后的刷新功能, 如下所示:
 
 ```java
 mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -211,7 +211,7 @@ mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListene
         mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mFCAdapter.onRefreshSuccess(DataServer.getSampleData(0));
+                mGXAdapter.onRefreshSuccess(DataServer.getSampleData(0));
                 mSwipeRefreshLayout.setRefreshing(false);
                 isErr = false;
             }
@@ -222,12 +222,12 @@ mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListene
 
 ```
 
-FCAdapter提供了上拉加载失败重试, 加载成功后新数据添加, 如下所示:
+GXAdapter提供了上拉加载失败重试, 加载成功后新数据添加, 如下所示:
 
-注: FCAdapter默认上拉加载的pageSize为10, 所以当接口请求回的数据size<10, 则判定所有数据已经加载完, 自动显示"别拽了, 到底啦~"
+注: GXAdapter默认上拉加载的pageSize为10, 所以当接口请求回的数据size<10, 则判定所有数据已经加载完, 自动显示"别拽了, 到底啦~"
 
 ```java
-mFCAdapter.setOnLoadMoreListener(new FCAdapter.OnLoadMoreListener() {
+mGXAdapter.setOnLoadMoreListener(new GXAdapter.OnLoadMoreListener() {
     @Override
     public void onLoadMore() {
         mRecyclerView.post(new Runnable() {
@@ -237,16 +237,16 @@ mFCAdapter.setOnLoadMoreListener(new FCAdapter.OnLoadMoreListener() {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if (mFCAdapter.getData().size() <= LIST_MAX_SIZE) {
-                                mFCAdapter.onLoadMoreSucess(DataServer.getSampleData(NETWORK_REQUEST_PAGE_SIZE));
+                            if (mGXAdapter.getData().size() <= LIST_MAX_SIZE) {
+                                mGXAdapter.onLoadMoreSucess(DataServer.getSampleData(NETWORK_REQUEST_PAGE_SIZE));
                             } else {
-                                mFCAdapter.onLoadMoreSucess(DataServer.getSampleData(6));
+                                mGXAdapter.onLoadMoreSucess(DataServer.getSampleData(6));
                             }
                         }
                     }, delayMillis);
                 } else {
                     isErr = true;
-                    mFCAdapter.onLoadMoreFailed();
+                    mGXAdapter.onLoadMoreFailed();
                 }
             }
         });
@@ -259,22 +259,22 @@ mFCAdapter.setOnLoadMoreListener(new FCAdapter.OnLoadMoreListener() {
 添加头部、尾部
 
 ```java
-mFCAdapter.addHeaderView(getView());
-mFCAdapter.addFooterView(getView());
+mGXAdapter.addHeaderView(getView());
+mGXAdapter.addFooterView(getView());
 ```
 
 删除指定头部、尾部
 
 ```java
-mFCAdapter.removeHeaderView(getView);
-mFCAdapter.removeFooterView(getView);
+mGXAdapter.removeHeaderView(getView);
+mGXAdapter.removeFooterView(getView);
 ```
 
 删除所有头部、尾部
 
 ```java
-mFCAdapter.removeAllHeaderView();
-mFCAdapter.removeAllFooterView();
+mGXAdapter.removeAllHeaderView();
+mGXAdapter.removeAllFooterView();
 ```
 
 添加空布局
@@ -341,7 +341,7 @@ public class MultipleItem implements MultiItem {
 在构造里面addItemType绑定type和layout的关系
 
 ```java
-public class MultipleItemAdapter extends FCMultiItemAdapter<MultipleItem> {
+public class MultipleItemAdapter extends GXMultiItemAdapter<MultipleItem> {
 
     public MultipleItemAdapter(Context context, List data) {
         super(data);
@@ -350,7 +350,7 @@ public class MultipleItemAdapter extends FCMultiItemAdapter<MultipleItem> {
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, MultipleItem item) {
+    protected void bindData(GXViewHolder holder, MultipleItem item) {
         switch (holder.getItemViewType()) {
             case MultipleItem.TEXT:
                 holder.setText(R.id.tv, item.getContent());
@@ -388,7 +388,7 @@ recyclerView.addItemDecoration(
 拖拽和侧滑的回调方法
 
 ```java
-FCItemDragListener fcItemDragListener = new FCItemDragListener() {
+GXItemDragListener gxItemDragListener = new GXItemDragListener() {
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
@@ -396,7 +396,7 @@ FCItemDragListener fcItemDragListener = new FCItemDragListener() {
     }
 };
 
-FCItemSwipeListener fcItemSwipeListener = new FCItemSwipeListener() {
+GXItemSwipeListener gxItemSwipeListener = new GXItemSwipeListener() {
 
     @Override
     public void onItemDismiss(int position) {
@@ -407,17 +407,17 @@ FCItemSwipeListener fcItemSwipeListener = new FCItemSwipeListener() {
 
 ```
 
-Adapter继承FCItemDraggableAdapter
+Adapter继承GXItemDraggableAdapter
 
 ```java
-public class ItemDragAndSwipeAdapter extends FCItemDraggableAdapter<String> {
+public class ItemDragAndSwipeAdapter extends GXItemDraggableAdapter<String> {
 
     public ItemDragAndSwipeAdapter(List<String> data) {
         super(R.layout.item_drag_and_swipe, data);
     }
 
     @Override
-    protected void bindData(final FCViewHolder holder, String item) {
+    protected void bindData(final GXViewHolder holder, String item) {
         holder.setOnClickListener(R.id.item_front_view, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -456,7 +456,7 @@ public class ItemDragAndSwipeAdapter extends FCItemDraggableAdapter<String> {
 
     @Override
     public int getSwipeLayoutResourceId(int position) {
-        //返回FCSwipeLayout在xml文件里的id
+        //返回GXSwipeLayout在xml文件里的id
         return R.id.swipe_layout;
     }
 }
@@ -467,9 +467,9 @@ Adapter的xml布局
 ```xml
 <<?xml version="1.0" encoding="utf-8"?>
  
- <!--如果开启侧滑菜单，则用FCSwipeLayout将顶部内容View和底部菜单View层叠起来-->
+ <!--如果开启侧滑菜单，则用GXSwipeLayout将顶部内容View和底部菜单View层叠起来-->
  
- <com.souche.android.sdk.fcadapter.swipe.FCSwipeLayout
+ <com.souche.android.sdk.gxadapter.swipe.GXSwipeLayout
      xmlns:android="http://schemas.android.com/apk/res/android"
      android:id="@+id/swipe_layout"
      android:layout_width="match_parent"
@@ -538,7 +538,7 @@ Adapter的xml布局
              android:src="@drawable/ic_drag_handle"/>
      </RelativeLayout>
  
- </com.souche.android.sdk.fcadapter.swipe.FCSwipeLayout>
+ </com.souche.android.sdk.gxadapter.swipe.GXSwipeLayout>
 ```
 
 Activity里开启侧滑菜单和拖拽排序
@@ -549,13 +549,13 @@ mRecyclerView.setAdapter(mAdapter);
 
 //以下代码需要在mRecyclerView.setAdapter(mAdapter)之后
 
-//开启拖拽排序, fcItemDragListener如果不用可不写
+//开启拖拽排序, gxItemDragListener如果不用可不写
 mAdapter.setLongPressDragEnabled(true);
-mAdapter.setFCItemDragListener(fcItemDragListener);
-//开启侧滑删除, fcItemSwipeListener如果不用可不写， 侧滑删除和侧滑菜单是互斥的，
+mAdapter.setGXItemDragListener(gxItemDragListener);
+//开启侧滑删除, gxItemSwipeListener如果不用可不写， 侧滑删除和侧滑菜单是互斥的，
 //开启侧滑删除后会直接删除整个ItemView，不再显示侧滑菜单。
 //mAdapter.setItemViewSwipeEnabled(true);
-//mAdapter.setFCItemSwipeListener(fcItemSwipeListener);
+//mAdapter.setGXItemSwipeListener(gxItemSwipeListener);
 ```
 
 
@@ -571,10 +571,10 @@ public class Level1Item extends AbstractExpandableItem<Person> {...}
 public class Person {...}
 ```
 
-adapter需要继承FCMultiItemAdapter
+adapter需要继承GXMultiItemAdapter
 
 ```java
-public class ExpandableItemAdapter extends FCMultiItemAdapter<MultiItemEntity> { 
+public class ExpandableItemAdapter extends GXMultiItemAdapter<MultiItemEntity> { 
     public ExpandableItemAdapter(List<MultiItemEntity> data) {    
         super(data);
         addItemType(TYPE_LEVEL_0, R.layout.item_expandable_lv0);   
@@ -582,7 +582,7 @@ public class ExpandableItemAdapter extends FCMultiItemAdapter<MultiItemEntity> {
         addItemType(TYPE_PERSON, R.layout.item_text_view);
     }
     @Override
-    protected void bindData(final FCViewHolder holder, final MultiItemEntity item) {
+    protected void bindData(final GXViewHolder holder, final MultiItemEntity item) {
         switch (holder.getItemViewType()) {
         case TYPE_LEVEL_0:
             ....
