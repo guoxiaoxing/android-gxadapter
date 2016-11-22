@@ -1,0 +1,14 @@
+com.guoxiaoixng.gxadapter
+com.guoxiaoixng.gxadapter.animation
+com.guoxiaoixng.gxadapter.callback
+com.guoxiaoixng.gxadapter.decoration
+com.guoxiaoixng.gxadapter.fastscroller
+com.guoxiaoixng.gxadapter.holder
+com.guoxiaoixng.gxadapter.item
+com.guoxiaoixng.gxadapter.listener
+com.guoxiaoixng.gxadapter.sticky
+com.guoxiaoixng.gxadapter.swipe
+com.guoxiaoixng.gxadapter.swipe.adapter
+com.guoxiaoixng.gxadapter.swipe.impl
+com.guoxiaoixng.gxadapter.swipe.interfaces
+com.guoxiaoixng.gxadapter.swipe.util
