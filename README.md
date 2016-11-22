@@ -15,21 +15,31 @@ FCAdapter是一个轻巧的RecyclerView.Adapter封装库, 提供如下功能:
 
 ##版本更迭:
 
-1.0.0-SNAPSHOT -- 初始版本
-
-1.0.1-SNAPSHOT -- 优化下拉刷新方式
-
-1.0.2-SNAPSHOT -- 优化上拉加载方式
-
-1.0.3-SNAPSHOT -- 添加侧滑菜单
+android-gxadapter:v1.0.0 -- 初始版本
 
 ##引用方式: 
 
+
+To get a Git project into your build:
+
+Step 1. Add it in your root build.gradle at the end of repositories:
+
 ```
-compile 'com.souche.android.sdk:fcadapter:1.0.3-SNAPSHOT' 
+allprojects {
+    repositories {
+		...
+		maven { url "https://jitpack.io" }
+	}
+}
 ```
 
-已经引用到baselib, 可以直接使用。
+Step 2. Add the dependency
+
+```
+dependencies {
+	compile 'com.github.guoxiaoxing:android-gxadapter:v1.0.0'
+}
+```
 
 # 一 基本用法
 
