@@ -1,18 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.3"
-
+    compileSdkVersion ANDROID_BUILD_COMPILE_SDK_VERSION as int
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
+        versionCode ANDROID_VERSION_CODE as int
+        versionName ANDROID_VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -32,24 +28,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: 'http://maven.souche.com:8081/nexus/content/repositories/snapshots')
-            pom.project {
-                name 'FCAdapter'
-                groupId 'com.souche.android.sdk'
-                artifactId 'fcadapter'
-                version '1.0.3-SNAPSHOT'
-                packaging 'aar'
+apply plugin: 'com.github.dcendents.android-maven'
 
-                developers {
-                    developer {
-                        id 'guoxiaoxing'
-                        name 'guoxiaoxing'
-                    }
-                }
-            }
-        }
-    }
-}
+group = 'com.github.guoxiaoxing'
