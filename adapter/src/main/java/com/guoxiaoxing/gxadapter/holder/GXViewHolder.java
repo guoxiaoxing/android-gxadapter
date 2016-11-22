@@ -27,11 +27,11 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 /**
- * Function: GXViewHolder
- * For more information, you can contact me by guoxiaoxing@souche.com
+ * For more information, you can visit https://github.com/guoxiaoxing or contact me by
+ * guoxiaoxingse@gmail.com
  *
  * @author guoxiaoxing
- * @since 16/9/18 上午10:59
+ * @since 16/11/22 下午7:05
  */
 public class GXViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperCallBack.ViewHolderCallBack {
 
