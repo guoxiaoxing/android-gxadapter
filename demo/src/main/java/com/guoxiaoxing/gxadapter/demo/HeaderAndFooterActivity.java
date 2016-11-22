@@ -10,16 +10,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.adapter.DemoFCAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 
 public class HeaderAndFooterActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private DemoFCAdapter mQuickDemoFCAdapter;
     private static final int PAGE_SIZE = 3;
+    private RecyclerView mRecyclerView;
+    private DemoGXAdapter mQuickDemoFCAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +47,17 @@ public class HeaderAndFooterActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mQuickDemoFCAdapter);
     }
 
-    private View getView() {
-        View view = getLayoutInflater().inflate(R.layout.head_view, null);
-        view.findViewById(R.id.tv).setVisibility(View.GONE);
-        view.setLayoutParams(new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        view.setOnClickListener(new View.OnClickListener() {
+    private void initAdapter() {
+        mQuickDemoFCAdapter = new DemoGXAdapter(PAGE_SIZE);
+        mQuickDemoFCAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(mQuickDemoFCAdapter);
+        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(HeaderAndFooterActivity.this, "click View", Toast.LENGTH_LONG).show();
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
+                Toast.makeText(HeaderAndFooterActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
-        return view;
+
     }
 
     private View getView(View.OnClickListener listener, String text) {
@@ -87,17 +86,17 @@ public class HeaderAndFooterActivity extends AppCompatActivity {
         };
     }
 
-    private void initAdapter() {
-        mQuickDemoFCAdapter = new DemoFCAdapter(PAGE_SIZE);
-        mQuickDemoFCAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(mQuickDemoFCAdapter);
-        mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
+    private View getView() {
+        View view = getLayoutInflater().inflate(R.layout.head_view, null);
+        view.findViewById(R.id.tv).setVisibility(View.GONE);
+        view.setLayoutParams(new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
-                Toast.makeText(HeaderAndFooterActivity.this, "" + Integer.toString(position), Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                Toast.makeText(HeaderAndFooterActivity.this, "click View", Toast.LENGTH_LONG).show();
             }
         });
-
+        return view;
     }
 
 }

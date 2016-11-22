@@ -10,17 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.adapter.ClickAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.demo.adapter.ClickAdapter;
 
 public class RecyclerClickItemActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private ClickAdapter mQuickAdapter;
     private static final int PAGE_SIZE = 10;
     private static String TAG = "RecyclerClickItemActivity";
+    private RecyclerView mRecyclerView;
+    private ClickAdapter mQuickAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +38,14 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
 
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
-                Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
+            public void onItemLongClick(GXAdapter adapter, View view, int position) {
+                super.onItemLongClick(adapter, view, position);
+                Toast.makeText(RecyclerClickItemActivity.this, "The " + Integer.toString(position) + " Item is LongClick ", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onItemChildClick(FCAdapter adapter, View view, int position) {
+            public void onItemChildClick(GXAdapter adapter, View view, int position) {
                 super.onItemChildClick(adapter, view, position);
                 switch (view.getId()) {
                     case R.id.tweetAvatar:
@@ -58,19 +59,16 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
                 }
             }
 
-
             @Override
-            public void onItemLongClick(FCAdapter adapter, View view, int position) {
-                super.onItemLongClick(adapter, view, position);
-                Toast.makeText(RecyclerClickItemActivity.this, "The " + Integer.toString(position) + " Item is LongClick ", Toast.LENGTH_SHORT).show();
+            public void onItemChildLongClick(GXAdapter adapter, View view, int position) {
+                super.onItemChildLongClick(adapter, view, position);
+                Toast.makeText(RecyclerClickItemActivity.this, "The " + Integer.toString(position) + "  view itemchild " + "is LongClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
-            public void onItemChildLongClick(FCAdapter adapter, View view, int position) {
-                super.onItemChildLongClick(adapter, view, position);
-                Toast.makeText(RecyclerClickItemActivity.this, "The " + Integer.toString(position) + "  view itemchild " + "is LongClick " + Integer.toString(position), Toast.LENGTH_SHORT).show();
-
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
+                Toast.makeText(RecyclerClickItemActivity.this, "" + Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
         /**
@@ -120,6 +118,12 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
         });*/
     }
 
+    private void initAdapter() {
+        mQuickAdapter = new ClickAdapter(PAGE_SIZE);
+        mQuickAdapter.openLoadAnimation();
+        mRecyclerView.setAdapter(mQuickAdapter);
+    }
+
     private View getHeadView() {
         View view = getLayoutInflater().inflate(R.layout.head_view, null);
         view.findViewById(R.id.tv).setVisibility(View.GONE);
@@ -145,13 +149,6 @@ public class RecyclerClickItemActivity extends AppCompatActivity {
         });
         return view;
     }
-
-    private void initAdapter() {
-        mQuickAdapter = new ClickAdapter(PAGE_SIZE);
-        mQuickAdapter.openLoadAnimation();
-        mRecyclerView.setAdapter(mQuickAdapter);
-    }
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

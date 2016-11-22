@@ -1,17 +1,17 @@
 package com.guoxiaoxing.gxadapter.demo.adapter;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
+import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.Status;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 
-public class DemoFCAdapter extends FCAdapter<Status> {
-    public DemoFCAdapter() {
+public class DemoGXAdapter extends GXAdapter<Status> {
+    public DemoGXAdapter() {
         super(R.layout.tweet, DataServer.getSampleData(100));
     }
 
-    public DemoFCAdapter(int dataSize) {
+    public DemoGXAdapter(int dataSize) {
         super(R.layout.tweet, DataServer.getSampleData(dataSize));
     }
 

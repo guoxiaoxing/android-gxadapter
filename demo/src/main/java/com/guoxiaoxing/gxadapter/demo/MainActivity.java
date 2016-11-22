@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.HomeAdapter;
 import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         initData();
-        FCAdapter homeAdapter = new HomeAdapter(R.layout.home_item_view, mDataList);
+        GXAdapter homeAdapter = new HomeAdapter(R.layout.home_item_view, mDataList);
         homeAdapter.openLoadAnimation();
         mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 Intent intent = new Intent(MainActivity.this, ACTIVITY[position]);
                 startActivity(intent);
             }

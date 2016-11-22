@@ -17,7 +17,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
-import com.souche.android.sdk.fcadapter.R;
 import com.guoxiaoixng.gxadapter.animation.AlphaAnimation;
 import com.guoxiaoixng.gxadapter.animation.BaseAnimation;
 import com.guoxiaoixng.gxadapter.animation.ScaleAnimation;
@@ -27,6 +26,7 @@ import com.guoxiaoixng.gxadapter.animation.SlideRightAnimation;
 import com.guoxiaoixng.gxadapter.fastscroller.FastScroller;
 import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoixng.gxadapter.item.IExpandable;
+import com.souche.android.sdk.fcadapter.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,30 +49,26 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * @author guoxiaoxing
  * @since 16/9/18 上午10:43
  */
-public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         implements FastScroller.onCreateBubbleTextListener {
-
-    protected static final String TAG = FCAdapter.class.getSimpleName();
 
     public static final int VIEW_TYPE_DEFAULT = 0x0000000;
     public static final int VIEW_TYPE_HEADER = 0x00000111;
     public static final int VIEW_TYPE_LOADING = 0x00000222;
     public static final int VIEW_TYPE_FOOTER = 0x00000333;
     public static final int VIEW_TYPE_EMPTY = 0x00000555;
-
     public static final int ANIMATION_TYPE_ALPHA = 0x00000001;
     public static final int ANIMATION_TYPE_SCALE = 0x00000002;
     public static final int ANIMATION_TYPE_SLIDE_BOTTOM = 0x00000003;
     public static final int ANIMATION_TYPE_SLIDE_LEFT = 0x00000004;
     public static final int ANIMATION_TYPE_SLIDE_RIGHT = 0x00000005;
-
-    @IntDef({ANIMATION_TYPE_ALPHA, ANIMATION_TYPE_SCALE, ANIMATION_TYPE_SLIDE_BOTTOM, ANIMATION_TYPE_SLIDE_LEFT, ANIMATION_TYPE_SLIDE_RIGHT})
-    @Retention(RetentionPolicy.SOURCE)
-    @interface AnimationType {
-    }
-
     public static final int NETWORK_REQUEST_PAGE_SIZE = 10;
-
+    protected static final String TAG = GXAdapter.class.getSimpleName();
+    protected Context mContext;
+    protected int mLayoutResId;
+    protected RecyclerView mRecyclerView;
+    protected LayoutInflater mLayoutInflater;
+    protected List<T> mData;
     private boolean mLoadMoreEnable = false;
     private boolean mLoadingMoreEnable = false;
     private boolean mFirstOnlyEnable = true;
@@ -80,34 +76,29 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     private boolean mEmptyEnable;
     private boolean mHeaderAndEmptyEnable;
     private boolean mFootAndEmptyEnable;
-
     private Interpolator mInterpolator = new LinearInterpolator();
     private BaseAnimation mCustomAnimation;
     private BaseAnimation mSelectAnimation = new SlideBottomAnimation();
-
     private LinearLayout mHeaderLayout;
     private LinearLayout mFooterLayout;
     private LinearLayout mCopyHeaderLayout = null;
     private LinearLayout mCopyFooterLayout = null;
-
     private View mContentView;
     private View mEmptyView;
     private View mCopyEmptyLayout;
     private View mLoadMoreFailedView;
     private View mLoadNoMoreView;
     private View mLoadingView;
-
     private OnLoadMoreListener mOnLoadMoreListener;
-
-    protected Context mContext;
-    protected int mLayoutResId;
-    protected RecyclerView mRecyclerView;
-    protected LayoutInflater mLayoutInflater;
-    protected List<T> mData;
-
     private int mDuration = 300;
     private int mLastPosition = -1;
     private int pageSize = -1;
+    private boolean flag = true;
+    private SpanSizeLookup mSpanSizeLookup;
+
+    public GXAdapter(List<T> data) {
+        this(0, data);
+    }
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -116,7 +107,7 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
      * @param layoutResId The layout resource id of each item.
      * @param data        A new list is created out of this one to avoid mutable list
      */
-    public FCAdapter(int layoutResId, List<T> data) {
+    public GXAdapter(int layoutResId, List<T> data) {
         this.mData = data == null ? new ArrayList<T>() : data;
         if (layoutResId != 0) {
             this.mLayoutResId = layoutResId;
@@ -125,18 +116,14 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
-    public FCAdapter(List<T> data) {
-        this(0, data);
-    }
-
-    public FCAdapter(View contentView, List<T> data) {
-        this(0, data);
-        mContentView = contentView;
-    }
-
     /*--------------*/
     /* MAIN METHODS */
     /*--------------*/
+
+    public GXAdapter(View contentView, List<T> data) {
+        this(0, data);
+        mContentView = contentView;
+    }
 
     @Override
     public FCViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -190,51 +177,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
                 bindData((FCViewHolder) holder, mData.get(holder.getLayoutPosition() - getHeaderLayoutCount()));
                 break;
         }
-    }
-
-    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
-        return createBaseViewHolder(parent, mLayoutResId);
-    }
-
-    protected FCViewHolder createBaseViewHolder(ViewGroup parent, int layoutResId) {
-        if (mContentView == null) {
-            return new FCViewHolder(getItemView(layoutResId, parent));
-        }
-        return new FCViewHolder(mContentView);
-    }
-
-    /**
-     * Get the number of item that will be created
-     *
-     * @return item count
-     */
-    @Override
-    public int getItemCount() {
-
-        int i = isLoadMore() ? 1 : 0;
-
-        int count = mData.size() + i + getHeaderLayoutCount() + getFooterLayoutCount();
-
-        if (mData.size() == 0 && mEmptyView != null) {
-            /**
-             *  setEmptyView(false) and add emptyView
-             */
-            if (count == 0 && (!mHeaderAndEmptyEnable || !mFootAndEmptyEnable)) {
-                count += getEmptyViewCount();
-                /**
-                 * {@link #setEmptyView(true, true, View)}
-                 */
-            } else if (mHeaderAndEmptyEnable || mFootAndEmptyEnable) {
-                count += getEmptyViewCount();
-            }
-
-            if ((mHeaderAndEmptyEnable && getHeaderLayoutCount() == 1 && count == 1) || count == 0) {
-                mEmptyEnable = true;
-                count += getEmptyViewCount();
-            }
-
-        }
-        return count;
     }
 
     /**
@@ -303,8 +245,219 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         return getDefItemViewType(position - getHeaderLayoutCount());
     }
 
+    /**
+     * Get the row id associated with the specified position in the list.
+     *
+     * @param position The position of the item within the adapter's data set whose row id we want.
+     * @return The id of the item at the specified position.
+     */
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    /**
+     * Get the number of item that will be created
+     *
+     * @return item count
+     */
+    @Override
+    public int getItemCount() {
+
+        int i = isLoadMore() ? 1 : 0;
+
+        int count = mData.size() + i + getHeaderLayoutCount() + getFooterLayoutCount();
+
+        if (mData.size() == 0 && mEmptyView != null) {
+            /**
+             *  setEmptyView(false) and add emptyView
+             */
+            if (count == 0 && (!mHeaderAndEmptyEnable || !mFootAndEmptyEnable)) {
+                count += getEmptyViewCount();
+                /**
+                 * {@link #setEmptyView(true, true, View)}
+                 */
+            } else if (mHeaderAndEmptyEnable || mFootAndEmptyEnable) {
+                count += getEmptyViewCount();
+            }
+
+            if ((mHeaderAndEmptyEnable && getHeaderLayoutCount() == 1 && count == 1) || count == 0) {
+                mEmptyEnable = true;
+                count += getEmptyViewCount();
+            }
+
+        }
+        return count;
+    }
+
+    /**
+     * Called when a view created by this adapter has been attached to a window.
+     * simple to solve item will layout using all
+     * {@link #setFullSpan(RecyclerView.ViewHolder)}
+     *
+     * @param holder
+     */
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        int type = holder.getItemViewType();
+        if (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) {
+            setFullSpan(holder);
+        } else {
+            addAnimation(holder);
+        }
+    }
+
+    /**
+     * When set to true, the item will layout using all span area. That means, if orientation
+     * is vertical, the view will have full width; if orientation is horizontal, the view will
+     * have full height.
+     * if the hold view use StaggeredGridLayoutManager they should using all span area
+     *
+     * @param holder True if this item should traverse all spans.
+     */
+    protected void setFullSpan(RecyclerView.ViewHolder holder) {
+        if (holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
+            StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
+            params.setFullSpan(true);
+        }
+    }
+
+    /**
+     * add animation when you want to show time
+     *
+     * @param holder
+     */
+    private void addAnimation(RecyclerView.ViewHolder holder) {
+        if (mOpenAnimationEnable) {
+            if (!mFirstOnlyEnable || holder.getLayoutPosition() > mLastPosition) {
+                BaseAnimation animation = null;
+                if (mCustomAnimation != null) {
+                    animation = mCustomAnimation;
+                } else {
+                    animation = mSelectAnimation;
+                }
+                for (Animator anim : animation.getAnimators(holder.itemView)) {
+                    startAnim(anim, holder.getLayoutPosition());
+                }
+                mLastPosition = holder.getLayoutPosition();
+            }
+        }
+    }
+
+    /**
+     * set anim to start when loading
+     *
+     * @param anim
+     * @param index
+     */
+    protected void startAnim(Animator anim, int index) {
+        anim.setDuration(mDuration).start();
+        anim.setInterpolator(mInterpolator);
+    }
+
+    /*-------------------------------*/
+    /* PULL TO REFRESH AND LOAD MORE */
+    /*-------------------------------*/
+
+    @Override
+    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int type = getItemViewType(position);
+                    if (mSpanSizeLookup == null)
+                        return (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) ? gridManager.getSpanCount() : 1;
+                    else
+                        return (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) ? gridManager.getSpanCount() : mSpanSizeLookup.getSpanSize(gridManager, position - getHeaderLayoutCount());
+                }
+            });
+        }
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mOnLoadMoreListener != null && pageSize == -1) {
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    int visibleItemCount = layoutManager.getChildCount();
+                    Log.e("visibleItemCount", visibleItemCount + "");
+                    openLoadMore(visibleItemCount);
+                }
+            }
+        });
+
+    }
+
     protected int getDefItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+
+    /**
+     * if addFooterView will be return 1, if not will be return 0
+     */
+    public int getFooterLayoutCount() {
+        return mFooterLayout == null ? 0 : 1;
+    }
+
+    /**
+     * if mEmptyView will be return 1 or not will be return 0
+     *
+     * @return
+     */
+    public int getEmptyViewCount() {
+        return mEmptyView == null ? 0 : 1;
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mRecyclerView = null;
+    }
+
+    /**
+     * Implement this method and use the holder to adapt the view to the given item.
+     *
+     * @param holder A fully initialized holder.
+     * @param item   The item that needs to be displayed.
+     */
+    protected abstract void bindData(FCViewHolder holder, T item);
+
+    /**
+     * if addHeaderView will be return 1, if not will be return 0
+     */
+    public int getHeaderLayoutCount() {
+        return mHeaderLayout == null ? 0 : 1;
+    }
+
+    private void addLoadMore(RecyclerView.ViewHolder holder) {
+        if (isLoadMore() && !mLoadingMoreEnable) {
+            mLoadingMoreEnable = true;
+            mOnLoadMoreListener.onLoadMore();
+        }
+    }
+
+    /**
+     * Determine whether it is loaded more
+     *
+     * @return is load more
+     */
+    private boolean isLoadMore() {
+        return mLoadMoreEnable && pageSize != -1 && mOnLoadMoreListener != null && mData.size() >= pageSize;
+    }
+
+    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+        return createBaseViewHolder(parent, mLayoutResId);
+    }
+
+    protected FCViewHolder createBaseViewHolder(ViewGroup parent, int layoutResId) {
+        if (mContentView == null) {
+            return new FCViewHolder(getItemView(layoutResId, parent));
+        }
+        return new FCViewHolder(mContentView);
     }
 
     /**
@@ -318,28 +471,10 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         return mLayoutInflater.inflate(layoutResId, parent, false);
     }
 
-    /**
-     * Implement this method and use the holder to adapt the view to the given item.
-     *
-     * @param holder A fully initialized holder.
-     * @param item   The item that needs to be displayed.
-     */
-    protected abstract void bindData(FCViewHolder holder, T item);
 
-    /**
-     * Get the row id associated with the specified position in the list.
-     *
-     * @param position The position of the item within the adapter's data set whose row id we want.
-     * @return The id of the item at the specified position.
-     */
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    /*-------------------------------*/
-    /* PULL TO REFRESH AND LOAD MORE */
-    /*-------------------------------*/
+    /*----------------*/
+    /* DATA OPERATION */
+    /*----------------*/
 
     /**
      * setting up a new instance to data;
@@ -363,13 +498,36 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
-    public interface OnLoadMoreListener {
-        void onLoadMore();
+    /**
+     * remove footer view from mFooterLayout,
+     * When the child count of mFooterLayout is 0, mFooterLayout will be set to null.
+     *
+     * @param footer footer
+     */
+    public void removeFooterView(View footer) {
+        if (mFooterLayout == null) return;
+
+        mFooterLayout.removeView(footer);
+        if (mFooterLayout.getChildCount() == 0) {
+            mFooterLayout = null;
+        }
+        this.notifyDataSetChanged();
     }
 
     public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
         this.mOnLoadMoreListener = onLoadMoreListener;
         openLoadMore(NETWORK_REQUEST_PAGE_SIZE);
+    }
+
+    /**
+     * when adapter's data size than pageSize and enable is true,the loading more function is enable,or disable
+     *
+     * @param pageSize pageSize
+     */
+    private void openLoadMore(int pageSize) {
+        this.pageSize = pageSize;
+        mLoadMoreEnable = true;
+
     }
 
     /**
@@ -398,17 +556,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         showLoadMoreFailedView();
     }
 
-    /**
-     * when adapter's data size than pageSize and enable is true,the loading more function is enable,or disable
-     *
-     * @param pageSize pageSize
-     */
-    private void openLoadMore(int pageSize) {
-        this.pageSize = pageSize;
-        mLoadMoreEnable = true;
-
-    }
-
     public void showLoadNoMoreView() {
         loadComplete();
         if (mLoadNoMoreView == null) {
@@ -435,13 +582,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         addFooterView(mLoadMoreFailedView);
     }
 
-    private void addLoadMore(RecyclerView.ViewHolder holder) {
-        if (isLoadMore() && !mLoadingMoreEnable) {
-            mLoadingMoreEnable = true;
-            mOnLoadMoreListener.onLoadMore();
-        }
-    }
-
     public void loadComplete() {
         mLoadMoreEnable = false;
         mLoadingMoreEnable = false;
@@ -455,20 +595,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     public boolean isLoading() {
         return mLoadingMoreEnable;
     }
-
-    /**
-     * Determine whether it is loaded more
-     *
-     * @return is load more
-     */
-    private boolean isLoadMore() {
-        return mLoadMoreEnable && pageSize != -1 && mOnLoadMoreListener != null && mData.size() >= pageSize;
-    }
-
-
-    /*----------------*/
-    /* DATA OPERATION */
-    /*----------------*/
 
     /**
      * same as onLoadMoreSucess(List<T>) but for when data is manually added to the adapter
@@ -523,7 +649,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         notifyItemRangeChanged(mData.size() - newData.size() + getHeaderLayoutCount(), newData.size());
     }
 
-
     /**
      * Get the data of list
      *
@@ -544,113 +669,11 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         return mData.get(position);
     }
 
-    /**
-     * if addHeaderView will be return 1, if not will be return 0
-     */
-    public int getHeaderLayoutCount() {
-        return mHeaderLayout == null ? 0 : 1;
-    }
-
-    /**
-     * if addFooterView will be return 1, if not will be return 0
-     */
-    public int getFooterLayoutCount() {
-        return mFooterLayout == null ? 0 : 1;
-    }
-
-    /**
-     * if mEmptyView will be return 1 or not will be return 0
-     *
-     * @return
-     */
-    public int getEmptyViewCount() {
-        return mEmptyView == null ? 0 : 1;
-    }
-
-
     private FCViewHolder getLoadingView(ViewGroup parent) {
         if (mLoadingView == null) {
             return createBaseViewHolder(parent, R.layout.baselib_loading_more);
         }
         return new FCViewHolder(mLoadingView);
-    }
-
-    /**
-     * Called when a view created by this adapter has been attached to a window.
-     * simple to solve item will layout using all
-     * {@link #setFullSpan(RecyclerView.ViewHolder)}
-     *
-     * @param holder
-     */
-    @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        int type = holder.getItemViewType();
-        if (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) {
-            setFullSpan(holder);
-        } else {
-            addAnimation(holder);
-        }
-    }
-
-    /**
-     * When set to true, the item will layout using all span area. That means, if orientation
-     * is vertical, the view will have full width; if orientation is horizontal, the view will
-     * have full height.
-     * if the hold view use StaggeredGridLayoutManager they should using all span area
-     *
-     * @param holder True if this item should traverse all spans.
-     */
-    protected void setFullSpan(RecyclerView.ViewHolder holder) {
-        if (holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
-            StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
-            params.setFullSpan(true);
-        }
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
-        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
-            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int type = getItemViewType(position);
-                    if (mSpanSizeLookup == null)
-                        return (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) ? gridManager.getSpanCount() : 1;
-                    else
-                        return (type == VIEW_TYPE_EMPTY || type == VIEW_TYPE_HEADER || type == VIEW_TYPE_FOOTER || type == VIEW_TYPE_LOADING) ? gridManager.getSpanCount() : mSpanSizeLookup.getSpanSize(gridManager, position - getHeaderLayoutCount());
-                }
-            });
-        }
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                if (mOnLoadMoreListener != null && pageSize == -1) {
-                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                    int visibleItemCount = layoutManager.getChildCount();
-                    Log.e("visibleItemCount", visibleItemCount + "");
-                    openLoadMore(visibleItemCount);
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView);
-        mRecyclerView = null;
-    }
-
-    private boolean flag = true;
-    private SpanSizeLookup mSpanSizeLookup;
-
-    public interface SpanSizeLookup {
-        int getSpanSize(GridLayoutManager gridLayoutManager, int position);
     }
 
     /**
@@ -766,22 +789,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     /**
-     * remove footer view from mFooterLayout,
-     * When the child count of mFooterLayout is 0, mFooterLayout will be set to null.
-     *
-     * @param footer footer
-     */
-    public void removeFooterView(View footer) {
-        if (mFooterLayout == null) return;
-
-        mFooterLayout.removeView(footer);
-        if (mFooterLayout.getChildCount() == 0) {
-            mFooterLayout = null;
-        }
-        this.notifyDataSetChanged();
-    }
-
-    /**
      * remove all header view from mHeaderLayout and set null to mHeaderLayout
      */
     public void removeAllHeaderView() {
@@ -801,23 +808,34 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         mFooterLayout = null;
     }
 
-    /*------------*/
-    /* EMPTY VIEW */
-    /*------------*/
-
-    /**
-     * Sets the view to show if the adapter is empty
-     */
-    public void setEmptyView(View emptyView) {
-        setEmptyView(false, false, emptyView);
-    }
-
     /**
      * @param isHeadAndEmpty false will not show headView if the data is empty true will show emptyView and headView
      * @param emptyView
      */
     public void setEmptyView(boolean isHeadAndEmpty, View emptyView) {
         setEmptyView(isHeadAndEmpty, false, emptyView);
+    }
+
+    /*------------*/
+    /* EMPTY VIEW */
+    /*------------*/
+
+    /**
+     * When the current adapter is empty, the BaseQuickAdapter can display a special view
+     * called the empty view. The empty view is used to provide feedback to the user
+     * that no data is available in this AdapterView.
+     *
+     * @return The view to show if the adapter is empty.
+     */
+    public View getEmptyView() {
+        return mEmptyView;
+    }
+
+    /**
+     * Sets the view to show if the adapter is empty
+     */
+    public void setEmptyView(View emptyView) {
+        setEmptyView(false, false, emptyView);
     }
 
     /**
@@ -835,55 +853,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
             mCopyEmptyLayout = emptyView;
         }
         mEmptyEnable = true;
-    }
-
-    /**
-     * When the current adapter is empty, the BaseQuickAdapter can display a special view
-     * called the empty view. The empty view is used to provide feedback to the user
-     * that no data is available in this AdapterView.
-     *
-     * @return The view to show if the adapter is empty.
-     */
-    public View getEmptyView() {
-        return mEmptyView;
-    }
-
-    /*----------------*/
-    /* ITEM ANIMATION */
-    /*----------------*/
-
-    /**
-     * add animation when you want to show time
-     *
-     * @param holder
-     */
-    private void addAnimation(RecyclerView.ViewHolder holder) {
-        if (mOpenAnimationEnable) {
-            if (!mFirstOnlyEnable || holder.getLayoutPosition() > mLastPosition) {
-                BaseAnimation animation = null;
-                if (mCustomAnimation != null) {
-                    animation = mCustomAnimation;
-                } else {
-                    animation = mSelectAnimation;
-                }
-                for (Animator anim : animation.getAnimators(holder.itemView)) {
-                    startAnim(anim, holder.getLayoutPosition());
-                }
-                mLastPosition = holder.getLayoutPosition();
-            }
-        }
-    }
-
-
-    /**
-     * set anim to start when loading
-     *
-     * @param anim
-     * @param index
-     */
-    protected void startAnim(Animator anim, int index) {
-        anim.setDuration(mDuration).start();
-        anim.setInterpolator(mInterpolator);
     }
 
     /**
@@ -915,6 +884,10 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
+    /*----------------*/
+    /* ITEM ANIMATION */
+    /*----------------*/
+
     /**
      * Set Custom ObjectAnimator
      *
@@ -940,10 +913,6 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     public void isFirstOnly(boolean firstOnly) {
         this.mFirstOnlyEnable = firstOnly;
     }
-
-    /*---------------------*/
-    /* EXPAND AND COLLAPSE */
-    /*---------------------*/
 
     private int recursiveExpand(int position, @NonNull List list) {
         int count = 0;
@@ -1012,6 +981,10 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     public int expand(@IntRange(from = 0) int position, boolean animate) {
         return expand(position, animate, true);
     }
+
+    /*---------------------*/
+    /* EXPAND AND COLLAPSE */
+    /*---------------------*/
 
     /**
      * Expand an expandable item with animation.
@@ -1169,5 +1142,18 @@ public abstract class FCAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public String onCreateBubbleText(int pos) {
         return null;
+    }
+
+    @IntDef({ANIMATION_TYPE_ALPHA, ANIMATION_TYPE_SCALE, ANIMATION_TYPE_SLIDE_BOTTOM, ANIMATION_TYPE_SLIDE_LEFT, ANIMATION_TYPE_SLIDE_RIGHT})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface AnimationType {
+    }
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
+    }
+
+    public interface SpanSizeLookup {
+        int getSpanSize(GridLayoutManager gridLayoutManager, int position);
     }
 }

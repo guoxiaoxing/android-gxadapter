@@ -15,14 +15,13 @@ import java.util.List;
  * @author guoxiaoxing
  * @since 16/9/19 下午2:58
  */
-public abstract class FCMultiItemAdapter<T extends MultiItem> extends FCAdapter<T> {
+public abstract class GXMultiItemAdapter<T extends MultiItem> extends GXAdapter<T> {
 
+    private static final int DEFAULT_VIEW_TYPE = -0xff;
     /**
      * layouts indexed with their types
      */
     private SparseArray<Integer> layouts;
-
-    private static final int DEFAULT_VIEW_TYPE = -0xff;
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -30,8 +29,24 @@ public abstract class FCMultiItemAdapter<T extends MultiItem> extends FCAdapter<
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public FCMultiItemAdapter(List<T> data) {
+    public GXMultiItemAdapter(List<T> data) {
         super(data);
+    }
+
+    protected void setDefaultViewTypeLayout(@LayoutRes int layoutResId) {
+        addItemType(DEFAULT_VIEW_TYPE, layoutResId);
+    }
+
+    protected void addItemType(int type, @LayoutRes int layoutResId) {
+        if (layouts == null) {
+            layouts = new SparseArray<>();
+        }
+        layouts.put(type, layoutResId);
+    }
+
+    @Override
+    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+        return createBaseViewHolder(parent, getLayoutId(viewType));
     }
 
     @Override
@@ -43,24 +58,8 @@ public abstract class FCMultiItemAdapter<T extends MultiItem> extends FCAdapter<
         return DEFAULT_VIEW_TYPE;
     }
 
-    protected void setDefaultViewTypeLayout(@LayoutRes int layoutResId) {
-        addItemType(DEFAULT_VIEW_TYPE, layoutResId);
-    }
-
-    @Override
-    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
-        return createBaseViewHolder(parent, getLayoutId(viewType));
-    }
-
     private int getLayoutId(int viewType) {
         return layouts.get(viewType);
-    }
-
-    protected void addItemType(int type, @LayoutRes int layoutResId) {
-        if (layouts == null) {
-            layouts = new SparseArray<>();
-        }
-        layouts.put(type, layoutResId);
     }
 }
 

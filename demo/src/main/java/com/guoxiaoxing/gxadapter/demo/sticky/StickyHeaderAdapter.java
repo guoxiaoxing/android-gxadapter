@@ -1,14 +1,14 @@
 package com.guoxiaoxing.gxadapter.demo.sticky;
 
-import com.guoxiaoixng.gxadapter.FCMultiItemAdapter;
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.entity.LineItem;
+import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
 import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoixng.gxadapter.sticky.StickyLayoutManager;
+import com.guoxiaoxing.gxadapter.demo.R;
+import com.guoxiaoxing.gxadapter.demo.entity.LineItem;
 
 import java.util.List;
 
-public class StickyHeaderAdapter extends FCMultiItemAdapter<LineItem> {
+public class StickyHeaderAdapter extends GXMultiItemAdapter<LineItem> {
 
     public static final int VIEW_TYPE_CONTENT = 0x00;
     public static final int VIEW_TYPE_HEADER = 0x01;

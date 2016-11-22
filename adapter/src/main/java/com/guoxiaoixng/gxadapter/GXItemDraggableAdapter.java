@@ -22,7 +22,7 @@ import java.util.List;
  * @author guoxiaoxing
  * @since 16/9/19 下午2:58
  */
-public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements ItemTouchHelperCallBack.AdapterCallBack,
+public abstract class GXItemDraggableAdapter<T> extends GXAdapter<T> implements ItemTouchHelperCallBack.AdapterCallBack,
         SwipeItemMangerInterface, SwipeAdapterInterface {
 
     public SwipeItemMangerImpl mItemManger = new SwipeItemMangerImpl(this);
@@ -33,6 +33,18 @@ public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements 
     private FCItemSwipeListener mFCItemSwipeListener;
     private ItemTouchHelperCallBack mItemTouchHelperCallBack;
 
+    public GXItemDraggableAdapter(View contentView, List<T> data) {
+        super(contentView, data);
+    }
+
+    public GXItemDraggableAdapter(List<T> data) {
+        super(data);
+    }
+
+    public GXItemDraggableAdapter(int layoutResId, List<T> data) {
+        super(layoutResId, data);
+    }
+
     public void setFCItemSwipeListener(FCItemSwipeListener FCItemSwipeListener) {
         mFCItemSwipeListener = FCItemSwipeListener;
     }
@@ -41,21 +53,9 @@ public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements 
         mFCItemDragListener = FCItemDragListener;
     }
 
-    public FCItemDraggableAdapter(View contentView, List<T> data) {
-        super(contentView, data);
-    }
-
     @Override
     protected void bindData(FCViewHolder holder, T item) {
         mItemManger.bind(holder.itemView, holder.getAdapterPosition());
-    }
-
-    public FCItemDraggableAdapter(List<T> data) {
-        super(data);
-    }
-
-    public FCItemDraggableAdapter(int layoutResId, List<T> data) {
-        super(layoutResId, data);
     }
 
     /**
@@ -86,6 +86,17 @@ public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements 
         mItemTouchHelperCallBack.setLongPressDragEnabled(longPressDragEnabled);
     }
 
+    private void setupItemTouchHelper() {
+        if (mItemTouchHelper == null) {
+            if (mRecyclerView == null) {
+                throw new IllegalStateException("RecyclerView cannot be null. Enabling LongPressDrag or Swipe must be done after the Adapter is added to the RecyclerView.");
+            }
+            mItemTouchHelperCallBack = new ItemTouchHelperCallBack(this);
+            mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallBack);
+            mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
+    }
+
     /**
      * Returns whether ItemTouchHelper should start a swipe operation if a pointer is swiped
      * over the View.
@@ -112,6 +123,15 @@ public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements 
         mItemTouchHelperCallBack.setItemViewSwipeEnabled(swipeEnabled);
     }
 
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        swapItems(fromPosition, toPosition);
+        if (mFCItemDragListener != null) {
+            mFCItemDragListener.onItemMove(fromPosition, toPosition);
+        }
+        return false;
+    }
+
     /**
      * Swaps the elements of list at indices fromPosition and toPosition and notify the change.
      * <p>Selection of swiped elements is automatically updated.</p>
@@ -128,26 +148,6 @@ public abstract class FCItemDraggableAdapter<T> extends FCAdapter<T> implements 
         //Perform item swap
         Collections.swap(getData(), fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-    }
-
-    private void setupItemTouchHelper() {
-        if (mItemTouchHelper == null) {
-            if (mRecyclerView == null) {
-                throw new IllegalStateException("RecyclerView cannot be null. Enabling LongPressDrag or Swipe must be done after the Adapter is added to the RecyclerView.");
-            }
-            mItemTouchHelperCallBack = new ItemTouchHelperCallBack(this);
-            mItemTouchHelper = new ItemTouchHelper(mItemTouchHelperCallBack);
-            mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-        }
-    }
-
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        swapItems(fromPosition, toPosition);
-        if(mFCItemDragListener != null){
-            mFCItemDragListener.onItemMove(fromPosition, toPosition);
-        }
-        return false;
     }
 
     @Override

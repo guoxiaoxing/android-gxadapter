@@ -2,7 +2,7 @@ package com.guoxiaoixng.gxadapter.listener;
 
 import android.view.View;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 
 /**
  * A convenience class to extend when you only want to FCItemChildLongClickListener for a subset
@@ -17,24 +17,24 @@ import com.guoxiaoixng.gxadapter.FCAdapter;
 public abstract class FCItemChildLongClickListener extends FCClickListener {
 
     @Override
-    public void onItemClick(FCAdapter adapter, View view, int position) {
+    public void onItemClick(GXAdapter adapter, View view, int position) {
 
     }
 
     @Override
-    public void onItemLongClick(FCAdapter adapter, View view, int position) {
+    public void onItemLongClick(GXAdapter adapter, View view, int position) {
 
     }
 
     @Override
-    public void onItemChildClick(FCAdapter adapter, View view, int position) {
+    public void onItemChildClick(GXAdapter adapter, View view, int position) {
 
     }
 
     @Override
-    public void onItemChildLongClick(FCAdapter adapter, View view, int position) {
+    public void onItemChildLongClick(GXAdapter adapter, View view, int position) {
         SimpleOnItemChildLongClick(adapter, view, position);
     }
 
-    public abstract void SimpleOnItemChildLongClick(FCAdapter adapter, View view, int position);
+    public abstract void SimpleOnItemChildLongClick(GXAdapter adapter, View view, int position);
 }

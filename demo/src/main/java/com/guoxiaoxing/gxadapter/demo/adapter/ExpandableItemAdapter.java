@@ -3,22 +3,21 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 import android.util.Log;
 import android.view.View;
 
+import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
+import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoixng.gxadapter.item.MultiItem;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.Level0Item;
 import com.guoxiaoxing.gxadapter.demo.entity.Level1Item;
 import com.guoxiaoxing.gxadapter.demo.entity.Person;
-import com.guoxiaoixng.gxadapter.FCMultiItemAdapter;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
-import com.guoxiaoixng.gxadapter.item.MultiItem;
 
 import java.util.List;
 
-public class ExpandableItemAdapter extends FCMultiItemAdapter<MultiItem> {
-    private static final String TAG = ExpandableItemAdapter.class.getSimpleName();
-
+public class ExpandableItemAdapter extends GXMultiItemAdapter<MultiItem> {
     public static final int TYPE_LEVEL_0 = 0;
     public static final int TYPE_LEVEL_1 = 1;
     public static final int TYPE_PERSON = 2;
+    private static final String TAG = ExpandableItemAdapter.class.getSimpleName();
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with

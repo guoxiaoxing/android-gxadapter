@@ -7,12 +7,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
-import com.guoxiaoxing.gxadapter.demo.R;
+import com.guoxiaoixng.gxadapter.GXAdapter;
+import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.SectionAdapter;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.MySection;
-import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
 
 import java.util.List;
 
@@ -31,17 +30,17 @@ public class SectionActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
 
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
+            public void onItemChildClick(GXAdapter adapter, View view, int position) {
+                Toast.makeText(SectionActivity.this, "onItemChildClick" + position, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 MySection mySection = mData.get(position);
                 if (mySection.isHeader)
                     Toast.makeText(SectionActivity.this, mySection.header, Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(SectionActivity.this, mySection.t.getName(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onItemChildClick(FCAdapter adapter, View view, int position) {
-                Toast.makeText(SectionActivity.this, "onItemChildClick" + position, Toast.LENGTH_LONG).show();
             }
 
 

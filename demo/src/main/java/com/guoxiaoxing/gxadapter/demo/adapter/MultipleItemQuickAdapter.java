@@ -2,14 +2,14 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 
 import android.content.Context;
 
-import com.guoxiaoixng.gxadapter.FCMultiItemAdapter;
+import com.guoxiaoixng.gxadapter.GXMultiItemAdapter;
+import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MultipleItem;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 
 import java.util.List;
 
-public class MultipleItemQuickAdapter extends FCMultiItemAdapter<MultipleItem> {
+public class MultipleItemQuickAdapter extends GXMultiItemAdapter<MultipleItem> {
 
     public MultipleItemQuickAdapter(Context context, List data) {
         super(data);

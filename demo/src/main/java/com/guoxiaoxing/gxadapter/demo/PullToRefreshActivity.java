@@ -11,24 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.guoxiaoixng.gxadapter.FCAdapter;
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.adapter.DemoFCAdapter;
-import com.guoxiaoxing.gxadapter.demo.data.DataServer;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 import com.guoxiaoixng.gxadapter.fastscroller.FastScroller;
 import com.guoxiaoixng.gxadapter.listener.FCItemClickListener;
+import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
+import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 
 
 public class PullToRefreshActivity extends AppCompatActivity implements FastScroller.OnScrollStateChangeListener {
+    private static final int NETWORK_REQUEST_PAGE_SIZE = 10;
+    private static final int LIST_MAX_SIZE = 20;
     private RecyclerView mRecyclerView;
-    private DemoFCAdapter mFCDemoFCAdapter;
+    private DemoGXAdapter mFCDemoFCAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FastScroller mFastScroller;
-
-    private static final int NETWORK_REQUEST_PAGE_SIZE = 10;
-
-    private static final int LIST_MAX_SIZE = 20;
-
     private int delayMillis = 1000;
 
     private boolean isErr;
@@ -47,13 +43,8 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
         mRecyclerView.setAdapter(mFCDemoFCAdapter);
     }
 
-    private void addHeadView() {
-        View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
-        mFCDemoFCAdapter.addHeaderView(headView);
-    }
-
     private void setupAdapter() {
-        mFCDemoFCAdapter = new DemoFCAdapter(NETWORK_REQUEST_PAGE_SIZE);
+        mFCDemoFCAdapter = new DemoGXAdapter(NETWORK_REQUEST_PAGE_SIZE);
         mFCDemoFCAdapter.openLoadAnimation();
 
         mRecyclerView.setAdapter(mFCDemoFCAdapter);
@@ -72,7 +63,7 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
                 }, delayMillis);
             }
         });
-        mFCDemoFCAdapter.setOnLoadMoreListener(new FCAdapter.OnLoadMoreListener() {
+        mFCDemoFCAdapter.setOnLoadMoreListener(new GXAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mRecyclerView.post(new Runnable() {
@@ -101,11 +92,16 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
 
         mRecyclerView.addOnItemTouchListener(new FCItemClickListener() {
             @Override
-            public void SimpleOnItemClick(FCAdapter adapter, View view, int position) {
+            public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
                 Toast.makeText(PullToRefreshActivity.this, Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
         setupFastScroller();
+    }
+
+    private void addHeadView() {
+        View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
+        mFCDemoFCAdapter.addHeaderView(headView);
     }
 
     private void setupFastScroller() {

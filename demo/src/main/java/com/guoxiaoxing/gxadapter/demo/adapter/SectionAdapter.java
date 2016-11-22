@@ -1,15 +1,15 @@
 package com.guoxiaoxing.gxadapter.demo.adapter;
 
-import com.guoxiaoixng.gxadapter.FCSectionAdapter;
+import com.guoxiaoixng.gxadapter.GXSectionAdapter;
+import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MySection;
 import com.guoxiaoxing.gxadapter.demo.entity.Video;
-import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 
 import java.util.List;
 
 
-public class SectionAdapter extends FCSectionAdapter<MySection> {
+public class SectionAdapter extends GXSectionAdapter<MySection> {
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.

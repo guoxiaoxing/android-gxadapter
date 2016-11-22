@@ -6,13 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoxing.gxadapter.demo.adapter.DemoFCAdapter;
+import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 
 public class EmptyViewActivity extends AppCompatActivity {
     private SwipeRefreshLayout mRvRefresh;
     private RecyclerView mRecyclerView;
-    private DemoFCAdapter mDemoFCAdapter;
+    private DemoGXAdapter mDemoFCAdapter;
 //    private EmptyLayout mEmptyLayout;
 
     @Override
@@ -24,7 +23,7 @@ public class EmptyViewActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mDemoFCAdapter = new DemoFCAdapter(10);
+        mDemoFCAdapter = new DemoGXAdapter(10);
 
 //        mEmptyLayout = new EmptyLayout(EmptyViewActivity.this);
 //        RecyclerView.LayoutParams params = new GridStickyLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

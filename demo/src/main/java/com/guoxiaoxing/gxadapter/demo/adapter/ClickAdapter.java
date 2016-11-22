@@ -3,7 +3,7 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.guoxiaoixng.gxadapter.FCAdapter;
+import com.guoxiaoixng.gxadapter.GXAdapter;
 import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
@@ -11,7 +11,7 @@ import com.guoxiaoxing.gxadapter.demo.entity.Status;
 import com.guoxiaoxing.gxadapter.demo.transform.GlideCircleTransform;
 
 
-public class ClickAdapter extends FCAdapter<Status> {
+public class ClickAdapter extends GXAdapter<Status> {
     public ClickAdapter() {
         super(R.layout.item, DataServer.getSampleData(100));
     }

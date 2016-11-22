@@ -5,13 +5,13 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Toast;
 
-import com.guoxiaoxing.gxadapter.demo.R;
-import com.guoxiaoixng.gxadapter.FCItemDraggableAdapter;
+import com.guoxiaoixng.gxadapter.GXItemDraggableAdapter;
 import com.guoxiaoixng.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.demo.R;
 
 import java.util.List;
 
-public class ItemDragAndSwipeAdapter extends FCItemDraggableAdapter<String> {
+public class ItemDragAndSwipeAdapter extends GXItemDraggableAdapter<String> {
 
     public ItemDragAndSwipeAdapter(List<String> data) {
         super(R.layout.item_drag_and_swipe, data);

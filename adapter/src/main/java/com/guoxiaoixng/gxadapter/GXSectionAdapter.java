@@ -13,10 +13,10 @@ import java.util.List;
  * @author guoxiaoxing
  * @since 16/9/19 下午2:58
  */
-public abstract class FCSectionAdapter<T extends SectionItem> extends FCAdapter {
+public abstract class GXSectionAdapter<T extends SectionItem> extends GXAdapter {
 
-    protected int mSectionHeadResId;
     protected static final int SECTION_HEADER_VIEW = 0x00000444;
+    protected int mSectionHeadResId;
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -26,14 +26,9 @@ public abstract class FCSectionAdapter<T extends SectionItem> extends FCAdapter 
      * @param layoutResId      The layout resource id of each item.
      * @param data             A new list is created out of this one to avoid mutable list
      */
-    public FCSectionAdapter(int layoutResId, int sectionHeadResId, List<T> data) {
+    public GXSectionAdapter(int layoutResId, int sectionHeadResId, List<T> data) {
         super(layoutResId, data);
         this.mSectionHeadResId = sectionHeadResId;
-    }
-
-    @Override
-    protected int getDefItemViewType(int position) {
-        return ((SectionItem) mData.get(position)).isHeader ? SECTION_HEADER_VIEW : 0;
     }
 
     @Override
@@ -42,6 +37,11 @@ public abstract class FCSectionAdapter<T extends SectionItem> extends FCAdapter 
             return new FCViewHolder(getItemView(mSectionHeadResId, parent));
 
         return super.onCreateDefViewHolder(parent, viewType);
+    }
+
+    @Override
+    protected int getDefItemViewType(int position) {
+        return ((SectionItem) mData.get(position)).isHeader ? SECTION_HEADER_VIEW : 0;
     }
 
     /**
