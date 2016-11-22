@@ -2,7 +2,7 @@ package com.guoxiaoxing.gxadapter.swipe.impl;
 
 import android.view.View;
 
-import com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout;
+import com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout;
 import com.guoxiaoxing.gxadapter.swipe.SimpleSwipeListener;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeAdapterInterface;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
@@ -25,7 +25,7 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
     protected int mOpenPosition = INVALID_POSITION;
 
     protected Set<Integer> mOpenPositions = new HashSet<Integer>();
-    protected Set<FCSwipeLayout> mShownLayouts = new HashSet<FCSwipeLayout>();
+    protected Set<GXSwipeLayout> mShownLayouts = new HashSet<GXSwipeLayout>();
 
     protected SwipeAdapterInterface swipeAdapterInterface;
 
@@ -49,19 +49,19 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
 
     public void bind(View view, int position) {
         int resId = swipeAdapterInterface.getSwipeLayoutResourceId(position);
-        FCSwipeLayout FCSwipeLayout = (FCSwipeLayout) view.findViewById(resId);
-        if (FCSwipeLayout == null)
+        GXSwipeLayout GXSwipeLayout = (GXSwipeLayout) view.findViewById(resId);
+        if (GXSwipeLayout == null)
             throw new IllegalStateException("can not find SwipeLayout in target view");
 
-        if (FCSwipeLayout.getTag(resId) == null) {
+        if (GXSwipeLayout.getTag(resId) == null) {
             OnLayoutListener onLayoutListener = new OnLayoutListener(position);
             SwipeMemory swipeMemory = new SwipeMemory(position);
-            FCSwipeLayout.addSwipeListener(swipeMemory);
-            FCSwipeLayout.addOnLayoutListener(onLayoutListener);
-            FCSwipeLayout.setTag(resId, new ValueBox(position, swipeMemory, onLayoutListener));
-            mShownLayouts.add(FCSwipeLayout);
+            GXSwipeLayout.addSwipeListener(swipeMemory);
+            GXSwipeLayout.addOnLayoutListener(onLayoutListener);
+            GXSwipeLayout.setTag(resId, new ValueBox(position, swipeMemory, onLayoutListener));
+            mShownLayouts.add(GXSwipeLayout);
         } else {
-            ValueBox valueBox = (ValueBox) FCSwipeLayout.getTag(resId);
+            ValueBox valueBox = (ValueBox) GXSwipeLayout.getTag(resId);
             valueBox.swipeMemory.setPosition(position);
             valueBox.onLayoutListener.setPosition(position);
             valueBox.position = position;
@@ -91,8 +91,8 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
     }
 
     @Override
-    public void closeAllExcept(FCSwipeLayout layout) {
-        for (FCSwipeLayout s : mShownLayouts) {
+    public void closeAllExcept(GXSwipeLayout layout) {
+        for (GXSwipeLayout s : mShownLayouts) {
             if (s != layout)
                 s.close();
         }
@@ -105,13 +105,13 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         } else {
             mOpenPosition = INVALID_POSITION;
         }
-        for (FCSwipeLayout s : mShownLayouts) {
+        for (GXSwipeLayout s : mShownLayouts) {
             s.close();
         }
     }
 
     @Override
-    public void removeShownLayouts(FCSwipeLayout layout) {
+    public void removeShownLayouts(GXSwipeLayout layout) {
         mShownLayouts.remove(layout);
     }
 
@@ -125,8 +125,8 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
     }
 
     @Override
-    public List<FCSwipeLayout> getOpenLayouts() {
-        return new ArrayList<FCSwipeLayout>(mShownLayouts);
+    public List<GXSwipeLayout> getOpenLayouts() {
+        return new ArrayList<GXSwipeLayout>(mShownLayouts);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         }
     }
 
-    class OnLayoutListener implements FCSwipeLayout.OnLayout {
+    class OnLayoutListener implements GXSwipeLayout.OnLayout {
 
         private int position;
 
@@ -163,7 +163,7 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         }
 
         @Override
-        public void onLayout(FCSwipeLayout v) {
+        public void onLayout(GXSwipeLayout v) {
             if (isOpen(position)) {
                 v.open(false, false);
             } else {
@@ -182,7 +182,7 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         }
 
         @Override
-        public void onClose(FCSwipeLayout layout) {
+        public void onClose(GXSwipeLayout layout) {
             if (mode == Attributes.Mode.Multiple) {
                 mOpenPositions.remove(position);
             } else {
@@ -191,14 +191,14 @@ public class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         }
 
         @Override
-        public void onStartOpen(FCSwipeLayout layout) {
+        public void onStartOpen(GXSwipeLayout layout) {
             if (mode == Attributes.Mode.Single) {
                 closeAllExcept(layout);
             }
         }
 
         @Override
-        public void onOpen(FCSwipeLayout layout) {
+        public void onOpen(GXSwipeLayout layout) {
             if (mode == Attributes.Mode.Multiple)
                 mOpenPositions.add(position);
             else {

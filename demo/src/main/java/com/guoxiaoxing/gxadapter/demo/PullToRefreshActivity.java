@@ -12,19 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.fastscroller.FastScroller;
+import com.guoxiaoxing.gxadapter.fastscroller.GXFastScroller;
 import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.DemoGXAdapter;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 
 
-public class PullToRefreshActivity extends AppCompatActivity implements FastScroller.OnScrollStateChangeListener {
+public class PullToRefreshActivity extends AppCompatActivity implements GXFastScroller.OnScrollStateChangeListener {
     private static final int NETWORK_REQUEST_PAGE_SIZE = 10;
     private static final int LIST_MAX_SIZE = 20;
     private RecyclerView mRecyclerView;
     private DemoGXAdapter mFCDemoFCAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private FastScroller mFastScroller;
+    private GXFastScroller mGXFastScroller;
     private int delayMillis = 1000;
 
     private boolean isErr;
@@ -35,7 +35,7 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
         setContentView(R.layout.activity_pull_to_refresh);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
-        mFastScroller = (FastScroller) findViewById(R.id.baselib_fast_scroller);
+        mGXFastScroller = (GXFastScroller) findViewById(R.id.baselib_fast_scroller);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         setupAdapter();
@@ -105,9 +105,9 @@ public class PullToRefreshActivity extends AppCompatActivity implements FastScro
     }
 
     private void setupFastScroller() {
-        mFastScroller.setRecyclerView(mRecyclerView);
-        mFastScroller.addOnScrollStateChangeListener(this);
-        mFastScroller.setViewsToUse(
+        mGXFastScroller.setRecyclerView(mRecyclerView);
+        mGXFastScroller.addOnScrollStateChangeListener(this);
+        mGXFastScroller.setViewsToUse(
                 R.layout.baselib_fast_scroller_bubble,
                 R.id.fast_scroller_bubble,
                 R.id.fast_scroller_handle, Color.parseColor("#FF571A"));

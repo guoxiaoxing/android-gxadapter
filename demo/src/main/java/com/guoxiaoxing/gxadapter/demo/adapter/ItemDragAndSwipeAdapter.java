@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.guoxiaoxing.gxadapter.GXItemDraggableAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class ItemDragAndSwipeAdapter extends GXItemDraggableAdapter<String> {
     }
 
     @Override
-    protected void bindData(final FCViewHolder holder, String item) {
+    protected void bindData(final GXViewHolder holder, String item) {
         holder.setOnClickListener(R.id.item_front_view, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

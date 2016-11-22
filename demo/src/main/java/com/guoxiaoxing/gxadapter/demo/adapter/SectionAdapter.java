@@ -1,7 +1,7 @@
 package com.guoxiaoxing.gxadapter.demo.adapter;
 
 import com.guoxiaoxing.gxadapter.GXSectionAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MySection;
 import com.guoxiaoxing.gxadapter.demo.entity.Video;
@@ -23,7 +23,7 @@ public class SectionAdapter extends GXSectionAdapter<MySection> {
     }
 
     @Override
-    protected void bindHeaderData(FCViewHolder helper, final MySection item) {
+    protected void bindHeaderData(GXViewHolder helper, final MySection item) {
         helper.setText(R.id.header, item.header);
         helper.setVisible(R.id.more,item.isMore());
         helper.addOnClickListener(R.id.more);
@@ -31,7 +31,7 @@ public class SectionAdapter extends GXSectionAdapter<MySection> {
 
 
     @Override
-    protected void bindData(FCViewHolder helper, MySection item) {
+    protected void bindData(GXViewHolder helper, MySection item) {
         Video video = (Video) item.t;
         //helper.setImageUrl(R.id.iv, video.getImg());
         helper.setText(R.id.tv, video.getName());

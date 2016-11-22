@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FCSwipeLayout extends FrameLayout {
+public class GXSwipeLayout extends FrameLayout {
     @Deprecated
     public static final int EMPTY_LAYOUT = -1;
     private static final int DRAG_LEFT = 1;
@@ -74,15 +74,15 @@ public class FCSwipeLayout extends FrameLayout {
         PullOut
     }
 
-    public FCSwipeLayout(Context context) {
+    public GXSwipeLayout(Context context) {
         this(context, null);
     }
 
-    public FCSwipeLayout(Context context, AttributeSet attrs) {
+    public GXSwipeLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FCSwipeLayout(Context context, AttributeSet attrs, int defStyle) {
+    public GXSwipeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mDragHelper = ViewDragHelper.create(this, mDragHelperCallback);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -113,17 +113,17 @@ public class FCSwipeLayout extends FrameLayout {
     }
 
     public interface SwipeListener {
-        void onStartOpen(FCSwipeLayout layout);
+        void onStartOpen(GXSwipeLayout layout);
 
-        void onOpen(FCSwipeLayout layout);
+        void onOpen(GXSwipeLayout layout);
 
-        void onStartClose(FCSwipeLayout layout);
+        void onStartClose(GXSwipeLayout layout);
 
-        void onClose(FCSwipeLayout layout);
+        void onClose(GXSwipeLayout layout);
 
-        void onUpdate(FCSwipeLayout layout, int leftOffset, int topOffset);
+        void onUpdate(GXSwipeLayout layout, int leftOffset, int topOffset);
 
-        void onHandRelease(FCSwipeLayout layout, float xvel, float yvel);
+        void onHandRelease(GXSwipeLayout layout, float xvel, float yvel);
     }
 
     public void addSwipeListener(SwipeListener l) {
@@ -163,11 +163,11 @@ public class FCSwipeLayout extends FrameLayout {
 
     /**
      * bind a view with a specific
-     * {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.OnRevealListener}
+     * {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.OnRevealListener}
      *
      * @param childId the view id.
      * @param l       the target
-     *                {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.OnRevealListener}
+     *                {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.OnRevealListener}
      */
     public void addRevealListener(int childId, OnRevealListener l) {
         View child = findViewById(childId);
@@ -186,10 +186,10 @@ public class FCSwipeLayout extends FrameLayout {
 
     /**
      * bind multiple views with an
-     * {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.OnRevealListener}.
+     * {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.OnRevealListener}.
      *
      * @param childIds the view id.
-     * @param l        the {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.OnRevealListener}
+     * @param l        the {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.OnRevealListener}
      */
     public void addRevealListener(int[] childIds, OnRevealListener l) {
         for (int i : childIds)
@@ -334,7 +334,7 @@ public class FCSwipeLayout extends FrameLayout {
             super.onViewReleased(releasedChild, xvel, yvel);
 
             for (SwipeListener l : mSwipeListeners) {
-                l.onHandRelease(FCSwipeLayout.this, xvel, yvel);
+                l.onHandRelease(GXSwipeLayout.this, xvel, yvel);
             }
 
             processHandRelease(xvel, yvel, isCloseBeforeDrag);
@@ -516,12 +516,12 @@ public class FCSwipeLayout extends FrameLayout {
                         l.onStartClose(this);
                     }
                 }
-                l.onUpdate(FCSwipeLayout.this, surfaceLeft - getPaddingLeft(), surfaceTop - getPaddingTop());
+                l.onUpdate(GXSwipeLayout.this, surfaceLeft - getPaddingLeft(), surfaceTop - getPaddingTop());
             }
 
             if (status == Status.Close) {
                 for (SwipeListener l : mSwipeListeners) {
-                    l.onClose(FCSwipeLayout.this);
+                    l.onClose(GXSwipeLayout.this);
                 }
                 mEventCounter = 0;
             }
@@ -532,7 +532,7 @@ public class FCSwipeLayout extends FrameLayout {
                     currentBottomView.setEnabled(true);
                 }
                 for (SwipeListener l : mSwipeListeners) {
-                    l.onOpen(FCSwipeLayout.this);
+                    l.onOpen(GXSwipeLayout.this);
                 }
                 mEventCounter = 0;
             }
@@ -647,7 +647,7 @@ public class FCSwipeLayout extends FrameLayout {
      * to support it from API 8.
      */
     public interface OnLayout {
-        void onLayout(FCSwipeLayout v);
+        void onLayout(GXSwipeLayout v);
     }
 
     private List<OnLayout> mOnLayoutListeners;
@@ -1008,7 +1008,7 @@ public class FCSwipeLayout extends FrameLayout {
         ViewParent t = getParent();
         if (t instanceof AdapterView) {
             AdapterView view = (AdapterView) t;
-            int p = view.getPositionForView(FCSwipeLayout.this);
+            int p = view.getPositionForView(GXSwipeLayout.this);
             if (p != AdapterView.INVALID_POSITION) {
                 view.performItemClick(view.getChildAt(p - view.getFirstVisiblePosition()), p, view
                         .getAdapter().getItemId(p));
@@ -1021,20 +1021,20 @@ public class FCSwipeLayout extends FrameLayout {
         ViewParent t = getParent();
         if (t instanceof AdapterView) {
             AdapterView view = (AdapterView) t;
-            int p = view.getPositionForView(FCSwipeLayout.this);
+            int p = view.getPositionForView(GXSwipeLayout.this);
             if (p == AdapterView.INVALID_POSITION) return false;
             long vId = view.getItemIdAtPosition(p);
             boolean handled = false;
             try {
                 Method m = AbsListView.class.getDeclaredMethod("performLongPress", View.class, int.class, long.class);
                 m.setAccessible(true);
-                handled = (boolean) m.invoke(view, FCSwipeLayout.this, p, vId);
+                handled = (boolean) m.invoke(view, GXSwipeLayout.this, p, vId);
 
             } catch (Exception e) {
                 e.printStackTrace();
 
                 if (view.getOnItemLongClickListener() != null) {
-                    handled = view.getOnItemLongClickListener().onItemLongClick(view, FCSwipeLayout.this, p, vId);
+                    handled = view.getOnItemLongClickListener().onItemLongClick(view, GXSwipeLayout.this, p, vId);
                 }
                 if (handled) {
                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
@@ -1122,7 +1122,7 @@ public class FCSwipeLayout extends FrameLayout {
                 } else {
                     target = surface;
                 }
-                mDoubleClickListener.onDoubleClick(FCSwipeLayout.this, target == surface);
+                mDoubleClickListener.onDoubleClick(GXSwipeLayout.this, target == surface);
             }
             return true;
         }
@@ -1142,8 +1142,8 @@ public class FCSwipeLayout extends FrameLayout {
 
     /**
      * There are 2 diffirent show mode.
-     * {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.ShowMode}.PullOut and
-     * {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.ShowMode}.LayDown.
+     * {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.ShowMode}.PullOut and
+     * {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.ShowMode}.LayDown.
      *
      * @param mode
      */
@@ -1204,7 +1204,7 @@ public class FCSwipeLayout extends FrameLayout {
     /**
      * get the open status.
      *
-     * @return {@link com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout.Status} Open , Close or
+     * @return {@link com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout.Status} Open , Close or
      * Middle.
      */
     public Status getOpenStatus() {
@@ -1457,7 +1457,7 @@ public class FCSwipeLayout extends FrameLayout {
     }
 
     public interface DoubleClickListener {
-        void onDoubleClick(FCSwipeLayout layout, boolean surface);
+        void onDoubleClick(GXSwipeLayout layout, boolean surface);
     }
 
     private int dp2px(float dp) {

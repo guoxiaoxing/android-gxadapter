@@ -1,7 +1,7 @@
 package com.guoxiaoxing.gxadapter.demo.adapter;
 
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.Status;
@@ -16,7 +16,7 @@ public class DemoGXAdapter extends GXAdapter<Status> {
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, Status item) {
+    protected void bindData(GXViewHolder holder, Status item) {
         holder.setText(R.id.tweetName, item.getUserName())
                 .setText(R.id.tweetText, item.getText())
                 .setText(R.id.tweetDate, item.getCreatedAt())

@@ -27,13 +27,13 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 /**
- * Function: FCViewHolder
+ * Function: GXViewHolder
  * For more information, you can contact me by guoxiaoxing@souche.com
  *
  * @author guoxiaoxing
  * @since 16/9/18 上午10:59
  */
-public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperCallBack.ViewHolderCallBack {
+public class GXViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperCallBack.ViewHolderCallBack {
 
     /**
      * Views indexed with their IDs
@@ -51,7 +51,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
     Object associatedObject;
 
 
-    public FCViewHolder(View view) {
+    public GXViewHolder(View view) {
         super(view);
         this.views = new SparseArray<View>();
         this.childClickViewIds = new LinkedHashSet<>();
@@ -77,15 +77,15 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId The view id.
      * @param value  The text to put in the text view.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setText(int viewId, CharSequence value) {
+    public GXViewHolder setText(int viewId, CharSequence value) {
         TextView view = getView(viewId);
         view.setText(value);
         return this;
     }
 
-    public FCViewHolder setText(int viewId, @StringRes int strId) {
+    public GXViewHolder setText(int viewId, @StringRes int strId) {
         TextView view = getView(viewId);
         view.setText(strId);
         return this;
@@ -96,9 +96,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId     The view id.
      * @param imageResId The image resource id.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setImageResource(int viewId, @DrawableRes int imageResId) {
+    public GXViewHolder setImageResource(int viewId, @DrawableRes int imageResId) {
         ImageView view = getView(viewId);
         view.setImageResource(imageResId);
         return this;
@@ -109,9 +109,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId The view id.
      * @param color  A color, not a resource id.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setBackgroundColor(int viewId, int color) {
+    public GXViewHolder setBackgroundColor(int viewId, int color) {
         View view = getView(viewId);
         view.setBackgroundColor(color);
         return this;
@@ -122,9 +122,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId        The view id.
      * @param backgroundRes A resource to use as a background.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setBackgroundRes(int viewId, @DrawableRes int backgroundRes) {
+    public GXViewHolder setBackgroundRes(int viewId, @DrawableRes int backgroundRes) {
         View view = getView(viewId);
         view.setBackgroundResource(backgroundRes);
         return this;
@@ -135,9 +135,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId    The view id.
      * @param textColor The text color (not a resource id).
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setTextColor(int viewId, int textColor) {
+    public GXViewHolder setTextColor(int viewId, int textColor) {
         TextView view = getView(viewId);
         view.setTextColor(textColor);
         return this;
@@ -149,9 +149,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param drawable The image drawable.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setImageDrawable(int viewId, Drawable drawable) {
+    public GXViewHolder setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);
         return this;
@@ -160,7 +160,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
     /**
      * Add an action to set the image of an image view. Can be called multiple times.
      */
-    public FCViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
+    public GXViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
         ImageView view = getView(viewId);
         view.setImageBitmap(bitmap);
         return this;
@@ -170,7 +170,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * Add an action to set the alpha of a view. Can be called multiple times.
      * Alpha between 0-1.
      */
-    public FCViewHolder setAlpha(int viewId, float value) {
+    public GXViewHolder setAlpha(int viewId, float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getView(viewId).setAlpha(value);
         } else {
@@ -188,9 +188,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId  The view id.
      * @param visible True for VISIBLE, false for GONE.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setVisible(int viewId, boolean visible) {
+    public GXViewHolder setVisible(int viewId, boolean visible) {
         View view = getView(viewId);
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
@@ -200,9 +200,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * Add links into a TextView.
      *
      * @param viewId The id of the TextView to linkify.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder linkify(int viewId) {
+    public GXViewHolder linkify(int viewId) {
         TextView view = getView(viewId);
         Linkify.addLinks(view, Linkify.ALL);
         return this;
@@ -211,7 +211,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
     /**
      * Apply the typeface to the given viewId, and enable subpixel rendering.
      */
-    public FCViewHolder setTypeface(int viewId, Typeface typeface) {
+    public GXViewHolder setTypeface(int viewId, Typeface typeface) {
         TextView view = getView(viewId);
         view.setTypeface(typeface);
         view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
@@ -221,7 +221,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
     /**
      * Apply the typeface to all the given viewIds, and enable subpixel rendering.
      */
-    public FCViewHolder setTypeface(Typeface typeface, int... viewIds) {
+    public GXViewHolder setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
             TextView view = getView(viewId);
             view.setTypeface(typeface);
@@ -235,9 +235,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param progress The progress.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setProgress(int viewId, int progress) {
+    public GXViewHolder setProgress(int viewId, int progress) {
         ProgressBar view = getView(viewId);
         view.setProgress(progress);
         return this;
@@ -249,9 +249,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * @param viewId   The view id.
      * @param progress The progress.
      * @param max      The max value of a ProgressBar.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setProgress(int viewId, int progress, int max) {
+    public GXViewHolder setProgress(int viewId, int progress, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
         view.setProgress(progress);
@@ -263,9 +263,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId The view id.
      * @param max    The max value of a ProgressBar.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setMax(int viewId, int max) {
+    public GXViewHolder setMax(int viewId, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
         return this;
@@ -276,9 +276,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId The view id.
      * @param rating The rating.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setRating(int viewId, float rating) {
+    public GXViewHolder setRating(int viewId, float rating) {
         RatingBar view = getView(viewId);
         view.setRating(rating);
         return this;
@@ -290,9 +290,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * @param viewId The view id.
      * @param rating The rating.
      * @param max    The range of the RatingBar to 0...max.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setRating(int viewId, float rating, int max) {
+    public GXViewHolder setRating(int viewId, float rating, int max) {
         RatingBar view = getView(viewId);
         view.setMax(max);
         view.setRating(rating);
@@ -304,10 +304,10 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The on click listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
     @Deprecated
-    public FCViewHolder setOnClickListener(int viewId, View.OnClickListener listener) {
+    public GXViewHolder setOnClickListener(int viewId, View.OnClickListener listener) {
         View view = getView(viewId);
         view.setOnClickListener(listener);
         return this;
@@ -319,7 +319,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * @param viewId add the child view id   can support childview click
      * @return
      */
-    public FCViewHolder addOnClickListener(int viewId) {
+    public GXViewHolder addOnClickListener(int viewId) {
         childClickViewIds.add(viewId);
         return this;
     }
@@ -330,7 +330,7 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * @param viewId
      * @return
      */
-    public FCViewHolder addOnLongClickListener(int viewId) {
+    public GXViewHolder addOnLongClickListener(int viewId) {
         itemChildLongClickViewIds.add(viewId);
         return this;
     }
@@ -341,9 +341,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The on touch listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnTouchListener(int viewId, View.OnTouchListener listener) {
+    public GXViewHolder setOnTouchListener(int viewId, View.OnTouchListener listener) {
         View view = getView(viewId);
         view.setOnTouchListener(listener);
         return this;
@@ -354,9 +354,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The on long click listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
+    public GXViewHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);
         return this;
@@ -367,9 +367,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The item on click listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnItemClickListener(int viewId, AdapterView.OnItemClickListener listener) {
+    public GXViewHolder setOnItemClickListener(int viewId, AdapterView.OnItemClickListener listener) {
         AdapterView view = getView(viewId);
         view.setOnItemClickListener(listener);
         return this;
@@ -380,9 +380,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The item long click listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnItemLongClickListener(int viewId, AdapterView.OnItemLongClickListener listener) {
+    public GXViewHolder setOnItemLongClickListener(int viewId, AdapterView.OnItemLongClickListener listener) {
         AdapterView view = getView(viewId);
         view.setOnItemLongClickListener(listener);
         return this;
@@ -393,9 +393,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The item selected click listener;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener) {
+    public GXViewHolder setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener) {
         AdapterView view = getView(viewId);
         view.setOnItemSelectedListener(listener);
         return this;
@@ -406,9 +406,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId   The view id.
      * @param listener The checked change listener of compound button.
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener) {
+    public GXViewHolder setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener) {
         CompoundButton view = getView(viewId);
         view.setOnCheckedChangeListener(listener);
         return this;
@@ -419,9 +419,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId The view id.
      * @param tag    The tag;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setTag(int viewId, Object tag) {
+    public GXViewHolder setTag(int viewId, Object tag) {
         View view = getView(viewId);
         view.setTag(tag);
         return this;
@@ -433,9 +433,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      * @param viewId The view id.
      * @param key    The key of tag;
      * @param tag    The tag;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setTag(int viewId, int key, Object tag) {
+    public GXViewHolder setTag(int viewId, int key, Object tag) {
         View view = getView(viewId);
         view.setTag(key, tag);
         return this;
@@ -446,9 +446,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId  The view id.
      * @param checked The checked status;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setChecked(int viewId, boolean checked) {
+    public GXViewHolder setChecked(int viewId, boolean checked) {
         View view = getView(viewId);
         // View unable cast to Checkable
         if (view instanceof CompoundButton) {
@@ -464,9 +464,9 @@ public class FCViewHolder extends RecyclerView.ViewHolder implements ItemTouchHe
      *
      * @param viewId  The view id.
      * @param adapter The adapter;
-     * @return The FCViewHolder for chaining.
+     * @return The GXViewHolder for chaining.
      */
-    public FCViewHolder setAdapter(int viewId, Adapter adapter) {
+    public GXViewHolder setAdapter(int viewId, Adapter adapter) {
         AdapterView view = getView(viewId);
         view.setAdapter(adapter);
         return this;

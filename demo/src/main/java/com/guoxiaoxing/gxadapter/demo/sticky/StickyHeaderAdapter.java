@@ -1,7 +1,7 @@
 package com.guoxiaoxing.gxadapter.demo.sticky;
 
 import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.sticky.StickyLayoutManager;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.LineItem;
@@ -27,7 +27,7 @@ public class StickyHeaderAdapter extends GXMultiItemAdapter<LineItem> {
 
 
     @Override
-    protected void bindData(FCViewHolder holder, LineItem item) {
+    protected void bindData(GXViewHolder holder, LineItem item) {
 
         StickyLayoutManager.LayoutParams layoutParams = (StickyLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
         layoutParams.setFirstPosition(0);

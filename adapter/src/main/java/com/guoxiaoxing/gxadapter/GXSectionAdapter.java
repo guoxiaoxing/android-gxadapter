@@ -2,7 +2,7 @@ package com.guoxiaoxing.gxadapter;
 
 import android.view.ViewGroup;
 
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.item.SectionItem;
 
 import java.util.List;
@@ -32,9 +32,9 @@ public abstract class GXSectionAdapter<T extends SectionItem> extends GXAdapter 
     }
 
     @Override
-    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+    protected GXViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         if (viewType == SECTION_HEADER_VIEW)
-            return new FCViewHolder(getItemView(mSectionHeadResId, parent));
+            return new GXViewHolder(getItemView(mSectionHeadResId, parent));
 
         return super.onCreateDefViewHolder(parent, viewType);
     }
@@ -49,7 +49,7 @@ public abstract class GXSectionAdapter<T extends SectionItem> extends GXAdapter 
      * @param item   The item that needs to be displayed.
      */
     @Override
-    protected void bindData(FCViewHolder holder, Object item) {
+    protected void bindData(GXViewHolder holder, Object item) {
         switch (holder.getItemViewType()) {
             case SECTION_HEADER_VIEW:
                 setFullSpan(holder);
@@ -61,8 +61,8 @@ public abstract class GXSectionAdapter<T extends SectionItem> extends GXAdapter 
         }
     }
 
-    protected abstract void bindHeaderData(FCViewHolder helper, T item);
+    protected abstract void bindHeaderData(GXViewHolder helper, T item);
 
-    protected abstract void bindData(FCViewHolder helper, T item);
+    protected abstract void bindData(GXViewHolder helper, T item);
 
 }

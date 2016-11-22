@@ -4,10 +4,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.guoxiaoxing.gxadapter.callback.ItemTouchHelperCallBack;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.listener.GXItemDragListener;
 import com.guoxiaoxing.gxadapter.listener.GXItemSwipeListener;
-import com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout;
+import com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout;
 import com.guoxiaoxing.gxadapter.swipe.impl.SwipeItemMangerImpl;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeAdapterInterface;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
@@ -54,7 +54,7 @@ public abstract class GXItemDraggableAdapter<T> extends GXAdapter<T> implements 
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, T item) {
+    protected void bindData(GXViewHolder holder, T item) {
         mItemManger.bind(holder.itemView, holder.getAdapterPosition());
     }
 
@@ -174,7 +174,7 @@ public abstract class GXItemDraggableAdapter<T> extends GXAdapter<T> implements 
     }
 
     @Override
-    public void closeAllExcept(FCSwipeLayout layout) {
+    public void closeAllExcept(GXSwipeLayout layout) {
         mItemManger.closeAllExcept(layout);
     }
 
@@ -189,12 +189,12 @@ public abstract class GXItemDraggableAdapter<T> extends GXAdapter<T> implements 
     }
 
     @Override
-    public List<FCSwipeLayout> getOpenLayouts() {
+    public List<GXSwipeLayout> getOpenLayouts() {
         return mItemManger.getOpenLayouts();
     }
 
     @Override
-    public void removeShownLayouts(FCSwipeLayout layout) {
+    public void removeShownLayouts(GXSwipeLayout layout) {
         mItemManger.removeShownLayouts(layout);
     }
 

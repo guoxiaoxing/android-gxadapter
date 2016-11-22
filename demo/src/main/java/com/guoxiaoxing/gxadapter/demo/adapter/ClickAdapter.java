@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.data.DataServer;
 import com.guoxiaoxing.gxadapter.demo.entity.Status;
@@ -21,7 +21,7 @@ public class ClickAdapter extends GXAdapter<Status> {
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, Status item) {
+    protected void bindData(GXViewHolder holder, Status item) {
 //        holder.getContentView().setBackgroundResource(R.drawable.card_click);
         holder.setText(R.id.tweetName, item.getUserName())
                 .setText(R.id.tweetText, item.getText())

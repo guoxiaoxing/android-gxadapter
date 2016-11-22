@@ -39,7 +39,7 @@ import java.util.List;
  * github.com/AndroidDeveloperLB/LollipopContactsRecyclerViewFastScroller</a>
  * @since 16/9/14 上午10:46
  */
-public class FastScroller extends FrameLayout {
+public class GXFastScroller extends FrameLayout {
 
     private static final int BUBBLE_ANIMATION_DURATION = 300;
     private static final int TRACK_SNAP_RANGE = 5;
@@ -65,7 +65,7 @@ public class FastScroller extends FrameLayout {
     private onCreateBubbleTextListener mOnCreateBubbleTextListener;
     private List<OnScrollStateChangeListener> scrollStateChangeListeners = new ArrayList<OnScrollStateChangeListener>();
 
-    public FastScroller(Context context) {
+    public GXFastScroller(Context context) {
         super(context);
         init();
     }
@@ -76,11 +76,11 @@ public class FastScroller extends FrameLayout {
         setClipChildren(false);
     }
 
-    public FastScroller(Context context, AttributeSet attrs) {
+    public GXFastScroller(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FastScroller(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GXFastScroller(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -91,7 +91,7 @@ public class FastScroller extends FrameLayout {
         this.recyclerView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                layoutManager = FastScroller.this.recyclerView.getLayoutManager();
+                layoutManager = GXFastScroller.this.recyclerView.getLayoutManager();
             }
         });
 
@@ -103,10 +103,10 @@ public class FastScroller extends FrameLayout {
         this.recyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                FastScroller.this.recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                GXFastScroller.this.recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
                 if (bubble == null || handle.isSelected()) return true;
-                int verticalScrollOffset = FastScroller.this.recyclerView.computeVerticalScrollOffset();
-                int verticalScrollRange = FastScroller.this.computeVerticalScrollRange();
+                int verticalScrollOffset = GXFastScroller.this.recyclerView.computeVerticalScrollOffset();
+                int verticalScrollRange = GXFastScroller.this.computeVerticalScrollRange();
                 float proportion = (float) verticalScrollOffset / ((float) verticalScrollRange - height);
                 setBubbleAndHandlePosition(height * proportion);
                 return true;

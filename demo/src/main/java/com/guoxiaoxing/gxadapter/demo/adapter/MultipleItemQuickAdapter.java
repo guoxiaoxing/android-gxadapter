@@ -3,7 +3,7 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 import android.content.Context;
 
 import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.MultipleItem;
 
@@ -18,7 +18,7 @@ public class MultipleItemQuickAdapter extends GXMultiItemAdapter<MultipleItem> {
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, MultipleItem item) {
+    protected void bindData(GXViewHolder holder, MultipleItem item) {
         switch (holder.getItemViewType()) {
             case MultipleItem.TEXT:
                 holder.setText(R.id.tv, item.getContent());

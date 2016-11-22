@@ -3,7 +3,7 @@ package com.guoxiaoxing.gxadapter.demo.adapter;
 import android.animation.Animator;
 
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
 
@@ -22,7 +22,7 @@ public class HomeAdapter extends GXAdapter<HomeItem> {
     }
 
     @Override
-    protected void bindData(FCViewHolder holder, HomeItem item) {
+    protected void bindData(GXViewHolder holder, HomeItem item) {
         holder.setText(R.id.info_text, item.getTitle());
     }
 }

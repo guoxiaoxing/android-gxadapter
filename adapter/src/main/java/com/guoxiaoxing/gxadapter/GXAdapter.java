@@ -23,8 +23,8 @@ import com.guoxiaoxing.gxadapter.animation.ScaleAnimation;
 import com.guoxiaoxing.gxadapter.animation.SlideBottomAnimation;
 import com.guoxiaoxing.gxadapter.animation.SlideLeftAnimation;
 import com.guoxiaoxing.gxadapter.animation.SlideRightAnimation;
-import com.guoxiaoxing.gxadapter.fastscroller.FastScroller;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.fastscroller.GXFastScroller;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.item.IExpandable;
 
 import java.lang.annotation.Retention;
@@ -49,7 +49,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * @since 16/9/18 上午10:43
  */
 public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
-        implements FastScroller.onCreateBubbleTextListener {
+        implements GXFastScroller.onCreateBubbleTextListener {
 
     public static final int VIEW_TYPE_DEFAULT = 0x0000000;
     public static final int VIEW_TYPE_HEADER = 0x00000111;
@@ -125,27 +125,27 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public FCViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        FCViewHolder FCViewHolder = null;
+    public GXViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        GXViewHolder GXViewHolder = null;
         this.mContext = parent.getContext();
         this.mLayoutInflater = LayoutInflater.from(mContext);
         switch (viewType) {
             case VIEW_TYPE_LOADING:
-                FCViewHolder = getLoadingView(parent);
+                GXViewHolder = getLoadingView(parent);
                 break;
             case VIEW_TYPE_HEADER:
-                FCViewHolder = new FCViewHolder(mHeaderLayout);
+                GXViewHolder = new GXViewHolder(mHeaderLayout);
                 break;
             case VIEW_TYPE_EMPTY:
-                FCViewHolder = new FCViewHolder(mEmptyView == mCopyEmptyLayout ? mCopyEmptyLayout : mEmptyView);
+                GXViewHolder = new GXViewHolder(mEmptyView == mCopyEmptyLayout ? mCopyEmptyLayout : mEmptyView);
                 break;
             case VIEW_TYPE_FOOTER:
-                FCViewHolder = new FCViewHolder(mFooterLayout);
+                GXViewHolder = new GXViewHolder(mFooterLayout);
                 break;
             default:
-                FCViewHolder = onCreateDefViewHolder(parent, viewType);
+                GXViewHolder = onCreateDefViewHolder(parent, viewType);
         }
-        return FCViewHolder;
+        return GXViewHolder;
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
 
         switch (viewType) {
             case VIEW_TYPE_DEFAULT:
-                bindData((FCViewHolder) holder, mData.get(holder.getLayoutPosition() - getHeaderLayoutCount()));
+                bindData((GXViewHolder) holder, mData.get(holder.getLayoutPosition() - getHeaderLayoutCount()));
                 break;
             case VIEW_TYPE_LOADING:
                 addLoadMore(holder);
@@ -173,7 +173,7 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
             case VIEW_TYPE_FOOTER:
                 break;
             default:
-                bindData((FCViewHolder) holder, mData.get(holder.getLayoutPosition() - getHeaderLayoutCount()));
+                bindData((GXViewHolder) holder, mData.get(holder.getLayoutPosition() - getHeaderLayoutCount()));
                 break;
         }
     }
@@ -423,7 +423,7 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
      * @param holder A fully initialized holder.
      * @param item   The item that needs to be displayed.
      */
-    protected abstract void bindData(FCViewHolder holder, T item);
+    protected abstract void bindData(GXViewHolder holder, T item);
 
     /**
      * if addHeaderView will be return 1, if not will be return 0
@@ -448,15 +448,15 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         return mLoadMoreEnable && pageSize != -1 && mOnLoadMoreListener != null && mData.size() >= pageSize;
     }
 
-    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+    protected GXViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         return createBaseViewHolder(parent, mLayoutResId);
     }
 
-    protected FCViewHolder createBaseViewHolder(ViewGroup parent, int layoutResId) {
+    protected GXViewHolder createBaseViewHolder(ViewGroup parent, int layoutResId) {
         if (mContentView == null) {
-            return new FCViewHolder(getItemView(layoutResId, parent));
+            return new GXViewHolder(getItemView(layoutResId, parent));
         }
-        return new FCViewHolder(mContentView);
+        return new GXViewHolder(mContentView);
     }
 
     /**
@@ -668,11 +668,11 @@ public abstract class GXAdapter<T> extends RecyclerView.Adapter<RecyclerView.Vie
         return mData.get(position);
     }
 
-    private FCViewHolder getLoadingView(ViewGroup parent) {
+    private GXViewHolder getLoadingView(ViewGroup parent) {
         if (mLoadingView == null) {
             return createBaseViewHolder(parent, R.layout.baselib_loading_more);
         }
-        return new FCViewHolder(mLoadingView);
+        return new GXViewHolder(mLoadingView);
     }
 
     /**

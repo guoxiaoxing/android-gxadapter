@@ -3,7 +3,7 @@ package com.guoxiaoxing.gxadapter.swipe.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout;
+import com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout;
 import com.guoxiaoxing.gxadapter.swipe.impl.SwipeItemMangerImpl;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeAdapterInterface;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
@@ -38,7 +38,7 @@ public abstract class RecyclerSwipeAdapter<VH extends RecyclerView.ViewHolder> e
     }
 
     @Override
-    public void closeAllExcept(FCSwipeLayout layout) {
+    public void closeAllExcept(GXSwipeLayout layout) {
         mItemManger.closeAllExcept(layout);
     }
 
@@ -53,12 +53,12 @@ public abstract class RecyclerSwipeAdapter<VH extends RecyclerView.ViewHolder> e
     }
 
     @Override
-    public List<FCSwipeLayout> getOpenLayouts() {
+    public List<GXSwipeLayout> getOpenLayouts() {
         return mItemManger.getOpenLayouts();
     }
 
     @Override
-    public void removeShownLayouts(FCSwipeLayout layout) {
+    public void removeShownLayouts(GXSwipeLayout layout) {
         mItemManger.removeShownLayouts(layout);
     }
 

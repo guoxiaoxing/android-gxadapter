@@ -6,7 +6,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.guoxiaoxing.gxadapter.swipe.FCSwipeLayout;
+import com.guoxiaoxing.gxadapter.swipe.GXSwipeLayout;
 import com.guoxiaoxing.gxadapter.swipe.impl.SwipeItemMangerImpl;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeAdapterInterface;
 import com.guoxiaoxing.gxadapter.swipe.interfaces.SwipeItemMangerInterface;
@@ -44,7 +44,7 @@ public abstract class SimpleCursorSwipeAdapter extends SimpleCursorAdapter imple
     }
 
     @Override
-    public void closeAllExcept(FCSwipeLayout layout) {
+    public void closeAllExcept(GXSwipeLayout layout) {
         mItemManger.closeAllExcept(layout);
     }
 
@@ -54,12 +54,12 @@ public abstract class SimpleCursorSwipeAdapter extends SimpleCursorAdapter imple
     }
 
     @Override
-    public List<FCSwipeLayout> getOpenLayouts() {
+    public List<GXSwipeLayout> getOpenLayouts() {
         return mItemManger.getOpenLayouts();
     }
 
     @Override
-    public void removeShownLayouts(FCSwipeLayout layout) {
+    public void removeShownLayouts(GXSwipeLayout layout) {
         mItemManger.removeShownLayouts(layout);
     }
 

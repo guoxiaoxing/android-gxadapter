@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.guoxiaoxing.gxadapter.GXMultiItemAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.item.MultiItem;
 import com.guoxiaoxing.gxadapter.demo.R;
 import com.guoxiaoxing.gxadapter.demo.entity.Level0Item;
@@ -33,7 +33,7 @@ public class ExpandableItemAdapter extends GXMultiItemAdapter<MultiItem> {
     }
 
     @Override
-    protected void bindData(final FCViewHolder holder, final MultiItem item) {
+    protected void bindData(final GXViewHolder holder, final MultiItem item) {
         switch (holder.getItemViewType()) {
             case TYPE_LEVEL_0:
                 final Level0Item lv0 = (Level0Item)item;

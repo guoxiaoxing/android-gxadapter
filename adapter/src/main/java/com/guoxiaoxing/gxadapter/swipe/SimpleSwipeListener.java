@@ -1,28 +1,28 @@
 package com.guoxiaoxing.gxadapter.swipe;
 
-public class SimpleSwipeListener implements FCSwipeLayout.SwipeListener {
+public class SimpleSwipeListener implements GXSwipeLayout.SwipeListener {
 
     @Override
-    public void onStartOpen(FCSwipeLayout layout) {
+    public void onStartOpen(GXSwipeLayout layout) {
     }
 
     @Override
-    public void onOpen(FCSwipeLayout layout) {
+    public void onOpen(GXSwipeLayout layout) {
     }
 
     @Override
-    public void onStartClose(FCSwipeLayout layout) {
+    public void onStartClose(GXSwipeLayout layout) {
     }
 
     @Override
-    public void onClose(FCSwipeLayout layout) {
+    public void onClose(GXSwipeLayout layout) {
     }
 
     @Override
-    public void onUpdate(FCSwipeLayout layout, int leftOffset, int topOffset) {
+    public void onUpdate(GXSwipeLayout layout, int leftOffset, int topOffset) {
     }
 
     @Override
-    public void onHandRelease(FCSwipeLayout layout, float xvel, float yvel) {
+    public void onHandRelease(GXSwipeLayout layout, float xvel, float yvel) {
     }
 }

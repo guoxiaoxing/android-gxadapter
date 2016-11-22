@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 import com.guoxiaoxing.gxadapter.item.MultiItem;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public abstract class GXMultiItemAdapter<T extends MultiItem> extends GXAdapter<
     }
 
     @Override
-    protected FCViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+    protected GXViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         return createBaseViewHolder(parent, getLayoutId(viewType));
     }
 

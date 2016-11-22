@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.holder.FCViewHolder;
+import com.guoxiaoxing.gxadapter.holder.GXViewHolder;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -131,7 +131,7 @@ public abstract class GXClickListener implements RecyclerView.OnItemTouchListene
             if (mIsPrepressed && mPressedView != null) {
                 mPressedView.setPressed(true);
                 final View pressedView = mPressedView;
-                FCViewHolder vh = (FCViewHolder) recyclerView.getChildViewHolder(pressedView);
+                GXViewHolder vh = (GXViewHolder) recyclerView.getChildViewHolder(pressedView);
 
                 if (isHeaderOrFooterPosition(vh.getLayoutPosition())) {
                     return false;
@@ -180,7 +180,7 @@ public abstract class GXClickListener implements RecyclerView.OnItemTouchListene
         public void onLongPress(MotionEvent e) {
             boolean isChildLongClick = false;
             if (mIsPrepressed && mPressedView != null) {
-                FCViewHolder vh = (FCViewHolder) recyclerView.getChildViewHolder(mPressedView);
+                GXViewHolder vh = (GXViewHolder) recyclerView.getChildViewHolder(mPressedView);
                 if (!isHeaderOrFooterPosition(vh.getLayoutPosition())) {
                     longClickViewIds = vh.getItemChildLongClickViewIds();
                     if (longClickViewIds != null && longClickViewIds.size() > 0) {
