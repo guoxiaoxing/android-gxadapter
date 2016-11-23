@@ -24,7 +24,7 @@ public class DataServer {
             status.setCreatedAt("04/05/" + i);
             status.setRetweet(i % 2 == 0);
             status.setUserAvatar("https://avatars1.githubusercontent.com/u/7698209?v=3&s=460");
-            status.setText("http://dafengche.souche.com");
+            status.setText("https://github.com/guoxiaoxing");
             list.add(status);
         }
         return list;
@@ -37,7 +37,7 @@ public class DataServer {
             status.setCreatedAt("04/05/" + i);
             status.setRetweet(i % 2 == 0);
             status.setUserAvatar("https://avatars1.githubusercontent.com/u/7698209?v=3&s=460");
-            status.setText("Powerful and flexible RecyclerAdapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper");
+            status.setText("https://github.com/guoxiaoxing");
             list.add(status);
         }
         return list;
