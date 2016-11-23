@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.guoxiaoxing.gxadapter.GXAdapter;
-import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 import com.guoxiaoxing.gxadapter.demo.adapter.HomeAdapter;
 import com.guoxiaoxing.gxadapter.demo.entity.HomeItem;
+import com.guoxiaoxing.gxadapter.listener.GXItemClickListener;
 
 import java.util.ArrayList;
 
@@ -47,11 +47,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupView();
+        setupData();
+    }
+
+    private void setupView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        initData();
-        GXAdapter homeAdapter = new HomeAdapter(R.layout.home_item_view, mDataList);
-        homeAdapter.openLoadAnimation();
         mRecyclerView.addOnItemTouchListener(new GXItemClickListener() {
             @Override
             public void SimpleOnItemClick(GXAdapter adapter, View view, int position) {
@@ -59,10 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mRecyclerView.setAdapter(homeAdapter);
     }
 
-    private void initData() {
+    private void setupData() {
         mDataList = new ArrayList<>();
         for (int i = 0; i < TITLE.length; i++) {
             HomeItem item = new HomeItem();
@@ -70,5 +70,9 @@ public class MainActivity extends AppCompatActivity {
             item.setActivity(ACTIVITY[i]);
             mDataList.add(item);
         }
+
+        HomeAdapter homeAdapter = new HomeAdapter(R.layout.home_item_view, mDataList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(homeAdapter);
     }
 }
