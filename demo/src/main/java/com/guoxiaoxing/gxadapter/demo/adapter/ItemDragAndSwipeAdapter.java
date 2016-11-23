@@ -19,6 +19,7 @@ public class ItemDragAndSwipeAdapter extends GXItemDraggableAdapter<String> {
 
     @Override
     protected void bindData(final GXViewHolder holder, String item) {
+
         holder.setOnClickListener(R.id.item_front_view, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
