@@ -1,5 +1,7 @@
 # GXAdapter User Guide
 
+[![](https://jitpack.io/v/guoxiaoxing/android-gxadapter.svg)](https://jitpack.io/#guoxiaoxing/android-gxadapter)
+
 GXAdapter是一个轻巧的RecyclerView.Adapter封装库, 提供如下功能:
 
 1. 下拉刷新、上拉加载
