@@ -9,9 +9,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
-    app:fcadapter_show_mode="pull_out"
     android:layout_marginRight="16dp"
-    android:layout_marginTop="4dp">
+    android:layout_marginTop="5dp"
+    app:fcadapter_show_mode="pull_out">
 
     <!--底部菜单View-->
 
@@ -45,11 +45,10 @@
     </LinearLayout>
 
     <!--顶部内容View-->
-
     <RelativeLayout
         android:id="@+id/item_front_view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/item_bg"
         android:padding="5dp">
 
@@ -68,6 +67,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:scaleType="center"
             android:src="@drawable/ic_drag_handle"/>
     </RelativeLayout>
