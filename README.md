@@ -15,12 +15,7 @@ GXAdapter是一个轻巧的RecyclerView.Adapter封装库, 提供如下功能:
 
 注: 所有用法均有demo演示, 建议先安装demo, 边操作, 边看用法。
 
-##版本更迭:
-
-android-gxadapter:v1.0.0 -- 初始版本
-
-##引用方式: 
-
+##添加依赖
 
 To get a Git project into your build:
 
@@ -30,8 +25,8 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 allprojects {
     repositories {
 		...
-		maven { url "https://jitpack.io" }
-	}
+	    maven { url "https://jitpack.io" }
+    }
 }
 ```
 
@@ -39,11 +34,15 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-	compile 'com.github.guoxiaoxing:android-gxadapter:v1.0.0'
+    compile 'com.github.guoxiaoxing:android-gxadapter:v1.0.0'
 }
 ```
 
-# 一 基本用法
+##版本更迭
+
+android-gxadapter:v1.0.0 -- 初始版本
+
+# 基本用法
 
 GXAdapter设计的用处之一就是最大限度的减少重复的代码, 使用步骤如下: 
 
@@ -82,7 +81,7 @@ String uri = itemsBean.getPicUrl();
 ```
 
 
-# 三 添加Item事件
+# 添加Item事件
 
 Item的点击事件
 
@@ -202,7 +201,7 @@ mRecyclerView.addOnItemTouchListener(new GXClickListener() {
 
 这里采用了缺省适配器模式
 
-# 三 下拉刷新、上拉加载
+# 下拉刷新、上拉加载
 
 GXAdapter提供了下拉刷新成功后的刷新功能, 如下所示:
 
@@ -256,7 +255,7 @@ mGXAdapter.setOnLoadMoreListener(new GXAdapter.OnLoadMoreListener() {
 });
 ```
 
-# 四 头布局、尾布局与空布局
+# 头布局、尾布局与空布局
 
 添加头部、尾部
 
@@ -289,7 +288,7 @@ mEmptyLayout.setLayoutParams(params);
 mAdapter.setEmptyView(mEmptyLayout);
 ```
 
-# 五 多类型布局
+# 多类型布局
 
 实体类必须实现MultiItem，在设置数据的时候，需要给每一个数据设置itemType
 
@@ -366,7 +365,7 @@ public class MultipleItemAdapter extends GXMultiItemAdapter<MultipleItem> {
 }
 ```
 
-# 六 分隔条
+# 分隔条
 
 HorizontalItemDecoration  水平分隔条
 
@@ -383,7 +382,7 @@ recyclerView.addItemDecoration(
 ```
 
 
-# 七 侧滑删除、拖拽排序、侧滑菜单
+# 侧滑删除、拖拽排序、侧滑菜单
 
 注意：侧滑删除和侧滑菜单是互斥的，开启侧滑删除后会直接删除整个ItemView，不再显示侧滑菜单。
 
@@ -563,7 +562,7 @@ mAdapter.setGXItemDragListener(gxItemDragListener);
 
 默认不支持多个不同的 ViewType 之间进行拖拽
 
-# 八 分组展开与折叠
+# 分组展开与折叠
 
 ```java
 // if you don't want to extent a class, you can also use the interface IExpandable.
@@ -640,7 +639,7 @@ public class ExpandableUseActivity extends Activity {
 }
 ```
 
-# 九 快速滑动、索引滑动
+# 快速滑动、索引滑动
 
 布局文件里添加FastScroller
 
@@ -694,7 +693,7 @@ mFastScroller.setViewsToUse(
         R.id.fast_scroller_handle, Color.parseColor("#FF571A"));
 ```
 
-# 十 Sticky Header
+# Sticky Header
 
 1 设置StickyLayoutManager
 
