@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.lang.ref.PhantomReference;
-
 /**
  * For more information, you can visit https://github.com/guoxiaoxing or contact me by
  * guoxiaoxingse@163.com.
