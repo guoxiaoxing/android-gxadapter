@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/adapter/adapter.iml" filepath="$PROJECT_DIR$/adapter/adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-gxadapter.iml" filepath="$PROJECT_DIR$/android-gxadapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/database.iml" filepath="$PROJECT_DIR$/database.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mysql/mysql.iml" filepath="$PROJECT_DIR$/mysql/mysql.iml" />
     </modules>
   </component>
 </project>
