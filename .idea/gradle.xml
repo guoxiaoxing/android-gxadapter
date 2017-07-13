@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/mysql" />
+            <option value="$PROJECT_DIR$/realm" />
+            <option value="$PROJECT_DIR$/sqlite" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

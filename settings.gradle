@@ -1,1 +1,1 @@
-include ':mysql'
+include ':mysql', ':sqlite', ':realm'
